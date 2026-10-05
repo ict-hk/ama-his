@@ -1,0 +1,2873 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天草の歴史を学ぼう 〜鈴木三公〜</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Noto+Sans+JP:wght@400;500;700;900&family=Yuji+Syuku&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .font-chalk {
+            font-family: 'Kosugi Maru', cursive;
+        }
+
+        .font-traditional {
+            font-family: 'Yuji Syuku', serif;
+        }
+
+        /* モダン黒板デザイン */
+        .blackboard {
+            background: linear-gradient(135deg, #1e3e2b 0%, #11271b 100%);
+            border: 8px solid #8b5cf6;
+            border-image: linear-gradient(to bottom right, #3b82f6, #8b5cf6) 1;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* チョーク風テキスト */
+        .chalk-text {
+            color: #f8fafc;
+            text-shadow: 0 0 2px rgba(255,255,255,0.4);
+        }
+
+        .chalk-yellow {
+            color: #fef08a;
+            text-shadow: 0 0 2px rgba(254,240,138,0.4);
+        }
+
+        .chalk-red {
+            color: #fca5a5;
+        }
+
+        .chalk-blue {
+            color: #38bdf8;
+            text-shadow: 0 0 4px rgba(56,189,248,0.5);
+        }
+
+        /* ふわふわ浮遊アニメーション */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-indigo-100">
+
+    <!-- ヘッダー -->
+    <header class="bg-indigo-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="bg-indigo-700/80 text-amber-300 p-2 rounded-xl text-lg flex items-center justify-center w-10 h-10 shadow-inner">
+                    <i class="fa-solid fa-landmark-dome"></i>
+                </span>
+                <div>
+                    <h1 class="font-bold text-base sm:text-lg tracking-wide leading-tight">天草・島原の乱後の復興に尽くした人</h1>
+                    <p class="text-xs text-indigo-200">〜鈴木三公・鈴木重成公〜</p>
+                </div>
+            </div>
+            <div class="hidden sm:block text-xs bg-indigo-800/80 px-3 py-1.5 rounded-full text-indigo-200 border border-indigo-700">
+                デジタル歴史教材
+            </div>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="max-w-5xl mx-auto w-full px-3 sm:px-4 py-4 flex-grow flex flex-col justify-center">
+        
+
+        <!-- 学習ステージ -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+            
+            <!-- 黒板エリア (8列) -->
+            <div class="lg:col-span-8 flex flex-col">
+                <div class="blackboard rounded-2xl p-5 sm:p-8 flex-grow flex flex-col justify-between min-h-[320px] sm:min-h-[380px] relative overflow-hidden">
+                    
+                    <!-- 日付表示風アクセント -->
+                    <div class="absolute top-4 right-5 font-chalk text-emerald-200/50 text-xs sm:text-sm tracking-widest flex items-center gap-1">
+                        <span>〇月×日</span>
+                    </div>
+
+                    <!-- メインテキスト表示 -->
+                    <div id="blackboardContent" class="flex-grow flex flex-col items-center justify-center text-center py-2">
+                        <!-- JSで動的挿入 -->
+                    </div>
+
+                    <!-- 黒板下部フッター -->
+                    <div class="mt-2 pt-2 border-t border-emerald-800/60 flex justify-between items-center text-xs text-emerald-300/80 font-chalk">
+                        <span><i class="fa-solid fa-chalkboard mr-1.5"></i>天草歴史Web教材</span>
+                        <span id="chalkNotice">解説画面</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- キャラクター表示エリア (4列) -->
+            <div class="lg:col-span-4 flex flex-col justify-between">
+                <div class="bg-gradient-to-b from-indigo-50/50 via-white to-amber-50/50 border border-slate-200 rounded-2xl p-4 shadow-sm flex flex-col items-center justify-center relative h-full min-h-[220px]">
+                    
+                    <!-- 武士キャラクター (SVG) -->
+                    <div id="samuraiAvatar" class="w-40 h-44 sm:w-48 sm:h-52 relative animate-float flex items-center justify-center">
+                        <!-- JSで動的挿入 -->
+                    </div>
+
+                    <!-- キャラクターラベル -->
+                    <div id="poseBadge" class="mt-3 bg-indigo-900 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-sm">
+                        【 鈴木重成 】
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- セリフ・ダイアログ ＆ ナビゲーション -->
+        <div class="mt-4 bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-md relative">
+            <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+                <div class="flex items-center space-x-2">
+                    <span class="w-3 h-3 rounded-full bg-indigo-600 inline-block shadow-sm"></span>
+                    <span class="font-bold text-indigo-950 text-base sm:text-lg font-traditional tracking-wide">【 鈴木重成 】</span>
+                </div>
+                <div id="modeStatus" class="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
+                    導入パート
+                </div>
+            </div>
+
+            <!-- 台詞テキスト -->
+            <div class="min-h-[60px] sm:min-h-[70px] flex items-center px-1">
+                <p id="narrationText" class="text-slate-800 text-base sm:text-lg font-bold leading-relaxed">
+                    <!-- JSで動的挿入 -->
+                </p>
+            </div>
+
+            <!-- 操作ボタン -->
+            <div class="mt-4 flex items-center justify-between pt-3 border-t border-slate-100">
+                <button id="prevBtn" onclick="prevSlide()" class="px-5 py-2.5 rounded-xl text-sm font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition disabled:opacity-30 disabled:cursor-not-allowed flex items-center space-x-2">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    <span>前へ</span>
+                </button>
+
+                <button id="nextBtn" onclick="nextSlide()" class="px-6 py-2.5 rounded-xl text-sm font-bold bg-indigo-600 hover:bg-indigo-700 text-white transition shadow-md hover:shadow-indigo-200 flex items-center space-x-2">
+                    <span>次へ進む</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- フッター (全クレジット対応) -->
+    <footer id="mainFooter" class="bg-slate-900 text-slate-400 text-xs py-3 text-center mt-6">
+        <div class="max-w-5xl mx-auto px-4 flex flex-wrap justify-center items-center gap-x-4 gap-y-1">
+            <span>制作：RKK熊本放送</span>
+            <span>企画：マックスファイブ</span>
+            <span>協力：OA通信サービス, アイエムエス・ドット・ジェーピー, ジェイムーブ</span>
+        </div>
+    </footer>
+
+    <!-- スクリプト -->
+    <script>
+        // --- 武士（鈴木重成公）のSVG生成 ---
+        function getSamuraiSVG(pose) {
+            const kimono = "#1e3a8a"; // 藍色
+            const haori = "#1e40af"; 
+            const hakama = "#38bdf8"; // 水色
+            const skin = "#fdedc9";
+
+            let armsSVG = "";
+            let itemSVG = "";
+            
+            // 正解・嬉しい時の判定フラグ
+            const isHappy = (pose === 'happy' || pose === 'correct' || pose === 'win');
+
+            if (isHappy || pose === 'pointing') {
+                // 正解（手を高く上げて喜ぶポーズ）
+                armsSVG = `
+                    <path d="M 35 110 Q 20 80 15 50" fill="none" stroke="${kimono}" stroke-width="14" stroke-linecap="round"/>
+                    <circle cx="15" cy="45" r="7" fill="${skin}"/>
+                    <path d="M 80 110 Q 85 125 90 125" fill="none" stroke="${kimono}" stroke-width="12" stroke-linecap="round"/>
+                    <circle cx="90" cy="125" r="6" fill="${skin}"/>
+                `;
+            } else if (pose === 'greeting') {
+                armsSVG = `<path d="M 35 110 Q 50 125 65 125 Q 80 125 95 110" fill="none" stroke="${kimono}" stroke-width="14" stroke-linecap="round"/>`;
+            } else if (pose === 'book') {
+                armsSVG = `
+                    <path d="M 35 110 Q 45 100 55 105" fill="none" stroke="${kimono}" stroke-width="12" stroke-linecap="round"/>
+                    <path d="M 80 110 Q 70 100 60 105" fill="none" stroke="${kimono}" stroke-width="12" stroke-linecap="round"/>
+                `;
+                itemSVG = `
+                    <rect x="45" y="90" width="26" height="32" rx="2" fill="#fff8dc" stroke="#8b4513" stroke-width="2" transform="rotate(-5, 58, 106)"/>
+                    <line x1="58" y1="91" x2="58" y2="121" stroke="#8b4513" stroke-width="1.5" transform="rotate(-5, 58, 106)"/>
+                `;
+            } else {
+                armsSVG = `
+                    <path d="M 35 110 Q 25 125 35 135" fill="none" stroke="${kimono}" stroke-width="12" stroke-linecap="round"/>
+                    <path d="M 80 110 Q 90 125 80 135" fill="none" stroke="${kimono}" stroke-width="12" stroke-linecap="round"/>
+                `;
+            }
+
+            // 表情（正解の時はにっこり口・笑い目にする）
+            const eyeSVG = isHappy ? `
+                <path d="M 52 53 Q 56 47 60 53" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M 70 53 Q 74 47 78 53" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+            ` : `
+                <ellipse cx="56" cy="53" rx="2.5" ry="3.5" fill="#333" />
+                <ellipse cx="74" cy="53" rx="2.5" ry="3.5" fill="#333" />
+            `;
+
+            const mouthSVG = isHappy ? `
+                <path d="M 56 65 Q 65 74 74 65 Z" fill="#b91c1c" />
+            ` : `
+                <path d="M 58 66 Q 65 72 72 66" fill="none" stroke="#b91c1c" stroke-width="2.5" stroke-linecap="round"/>
+            `;
+
+            return `
+                <svg viewBox="0 0 130 160" class="w-full h-full drop-shadow-md">
+                    <!-- 刀 -->
+                    <path d="M 30 115 L 10 135" stroke="#333" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M 28 118 L 12 138" stroke="#ccc" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M 25 110 L 5 125" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+
+                    <!-- 着物・羽織 -->
+                    <path d="M 35 90 L 95 90 L 105 160 L 25 160 Z" fill="${hakama}" />
+                    <path d="M 35 90 Q 65 100 95 90 L 100 140 L 30 140 Z" fill="${haori}" />
+                    <path d="M 50 90 L 65 120 L 80 90" fill="none" stroke="#fff" stroke-width="3"/>
+                    
+                    <circle cx="45" cy="105" r="2" fill="#fff"/>
+                    <circle cx="85" cy="105" r="2" fill="#fff"/>
+
+                    ${armsSVG}
+                    ${itemSVG}
+
+                    <!-- 首・顔 -->
+                    <rect x="58" y="75" width="14" height="18" fill="${skin}" />
+                    <ellipse cx="65" cy="55" rx="22" ry="26" fill="${skin}" />
+
+                    <!-- 髪 -->
+                    <path d="M 50 38 Q 65 30 80 38 Q 80 32 65 30 Q 50 32 50 38 Z" fill="#222" />
+                    <rect x="61" y="20" width="8" height="15" rx="3" fill="#222" transform="rotate(15 65 27)"/>
+                    <path d="M 62 21 L 68 21" stroke="#DAA520" stroke-width="2"/>
+
+                    <!-- 表情 -->
+                    <path d="M 50 45 Q 56 42 60 46" fill="none" stroke="#333" stroke-width="2"/>
+                    <path d="M 70 46 Q 74 42 80 45" fill="none" stroke="#333" stroke-width="2"/>
+                    ${eyeSVG}
+                    <path d="M 65 54 L 63 60 L 67 60" fill="none" stroke="#d97706" stroke-width="1.5"/>
+                    ${mouthSVG}
+                </svg>
+            `;
+        }
+
+        // 判定保持フラグ
+        let lastSelectedCorrect = null;
+
+        // --- シナリオデータ ---
+        const slidesData = [
+            // 導入 (1-5)
+            {
+                id: 1, chapter: "導入", title: "タイトル", pose: "greeting", notice: "タイトル画面",
+                blackboardHTML: `
+                    <div class="space-y-4 my-auto">
+                        <div class="inline-block border border-amber-300/60 bg-amber-400/10 px-4 py-1 rounded-full text-amber-200 text-xs sm:text-sm font-chalk">
+                            鈴木重成公没後３５０年記念事業
+                        </div>
+                        <h2 class="text-2xl sm:text-4xl font-bold chalk-text font-chalk leading-snug">
+                            「天草・島原の乱後の復興に尽くした人」
+                        </h2>
+                        <p class="text-xl sm:text-2xl chalk-yellow font-chalk">〜 鈴木三公 〜</p>
+                        <div class="pt-3">
+                            <button onclick="nextSlide()" class="px-8 py-3 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold font-chalk text-lg shadow-lg hover:scale-105 transition transform flex items-center justify-center gap-2 mx-auto">
+                                <i class="fa-solid fa-play"></i> クイズ START
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "鈴木重成公没後350年記念 デジタル歴史教材へようこそ！"
+            },
+            {
+                id: 2, chapter: "導入", title: "あいさつ", pose: "greeting", notice: "導入パート",
+                blackboardHTML: `<div class="space-y-4 my-auto"><h2 class="text-2xl sm:text-4xl font-bold chalk-text font-chalk">「天草・島原の乱後の復興に尽くした人」</h2><p class="text-xl sm:text-2xl chalk-yellow font-chalk">〜 鈴木三公 〜</p></div>`,
+                speechText: "こんにちは！鈴木重成です。"
+            },
+            {
+                id: 3, chapter: "導入", title: "学習の目的", pose: "pointing", notice: "目的説明",
+                blackboardHTML: `<div class="space-y-4 my-auto"><h2 class="text-2xl sm:text-4xl font-bold chalk-text font-chalk">「天草・島原の乱後の復興に尽くした人」</h2><p class="text-xl sm:text-2xl chalk-yellow font-chalk">〜 鈴木三公 〜</p></div>`,
+                speechText: "この「天草・島原の乱後の復興に尽くした人〜鈴木三公〜」では、天草の歴史を振り返りながら、今の天草を考えます。"
+            },
+            {
+                id: 4, chapter: "導入", title: "ご案内", pose: "greeting", notice: "案内",
+                blackboardHTML: `<div class="space-y-4 my-auto"><h2 class="text-2xl sm:text-4xl font-bold chalk-text font-chalk">「天草・島原の乱後の復興に尽くした人」</h2><p class="text-xl sm:text-2xl chalk-yellow font-chalk">〜 鈴木三公 〜</p></div>`,
+                speechText: "みなさん、私についてきて下さいね。"
+            },
+            {
+                id: 5, chapter: "導入", title: "進め方", pose: "pointing", notice: "進め方案内",
+                blackboardHTML: `<div class="space-y-4 my-auto"><h2 class="text-2xl sm:text-4xl font-bold chalk-text font-chalk">「天草・島原の乱後の復興に尽くした人」</h2><p class="text-xl sm:text-2xl chalk-yellow font-chalk">〜 鈴木三公 〜</p></div>`,
+                speechText: "質問ごとに、答えの解説ページがあります。さあ、頑張りましょう！"
+            },
+
+            // 第一章タイトル (6-1)
+            {
+                id: 6, chapter: "第一章", title: "第一章タイトル", pose: "greeting", notice: "第一章スタート",
+                blackboardHTML: `
+                    <div class="space-y-6 my-auto cursor-pointer" onclick="nextSlide()">
+                        <div class="bg-amber-400/20 text-amber-200 border border-amber-400/40 px-6 py-2 rounded-full text-sm sm:text-base font-chalk inline-block">★ 第一章 ★</div>
+                        <h2 class="text-3xl sm:text-5xl font-bold chalk-yellow font-chalk leading-tight">キリシタン文化ってなぁ〜に？</h2>
+                        <p class="text-lg sm:text-xl chalk-text font-chalk pt-2 animate-pulse">画面をクリックしてね！</p>
+                    </div>
+                `,
+                speechText: "第一章、キリシタン文化ってなぁ〜に？スタートします！"
+            },
+
+            // Q1前振り (7-10)
+            { id: 7, chapter: "第一章", title: "Q1 前振り 1/4", pose: "pointing", notice: "1. キリシタン文化ってなぁ〜に？", blackboardHTML: `<div class="w-full text-left my-auto px-4"><h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">1. キリシタン文化ってなぁ〜に？</h3></div>`, speechText: "さあ、最初は歴史問題からいくよ。" },
+            { id: 8, chapter: "第一章", title: "Q1 前振り 2/4", pose: "pointing", notice: "1. キリシタン文化ってなぁ〜に？", blackboardHTML: `<div class="w-full text-left my-auto px-4"><h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">1. キリシタン文化ってなぁ〜に？</h3></div>`, speechText: "江戸時代になる前、日本にキリスト教が入ってきました。" },
+            { id: 9, chapter: "第一章", title: "Q1 前振り 3/4", pose: "pointing", notice: "1. キリシタン文化ってなぁ〜に？", blackboardHTML: `<div class="w-full text-left my-auto px-4"><h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">1. キリシタン文化ってなぁ〜に？</h3></div>`, speechText: "天草でもキリスト教を信じる人が多くなり、その人たちはキリシタンと呼ばれていました。" },
+            { id: 10, chapter: "第一章", title: "Q1 前振り 4/4", pose: "book", notice: "1. キリシタン文化ってなぁ〜に？", blackboardHTML: `<div class="w-full text-left my-auto px-4"><h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">1. キリシタン文化ってなぁ〜に？</h3></div>`, speechText: "では、問題です。黒板に表示されるよ。" },
+
+            // Q1 クイズ出題
+            {
+                id: 11, chapter: "第一章", title: "クイズ Q1", pose: "book", notice: "Q1. クイズ挑戦",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4 space-y-3">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk">1. キリシタン文化ってなぁ〜に？</p>
+                        <h3 class="text-base sm:text-lg chalk-yellow font-chalk mb-3">Q1. そのころ天草コレジョで印刷された本の中に、有名な西洋のお話があります。そのお話とは次のうちどれでしょう？</h3>
+                        <div class="space-y-2 max-w-xs pl-4">
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">① 若草物語(わかくさものがたり)</button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">② フランダースの犬</button>
+                            <button onclick="selectAnswer(true)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">③ イソップ物語</button>
+                        </div>
+                    </div>
+                `,
+                speechText: "わかるかな？上のせんたくしから、ひとつえらんでクリックしてね。"
+            },
+
+            // Q1 〇×判定画面
+            {
+                id: 12, chapter: "第一章", title: "Q1 判定", pose: "normal", notice: "Q1 判定",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-sm sm:text-base chalk-text font-chalk mb-2">1. キリシタン文化ってなぁ〜に？</p>
+                        <h3 class="text-lg sm:text-xl chalk-yellow font-chalk mb-4">Q1. そのころ天草コレジョで印刷された本の中に...</h3>
+                        <div id="q1-result-mark" class="text-6xl sm:text-7xl font-bold my-2"></div>
+                        <div id="q1-result-text" class="text-xl sm:text-2xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は3番の「イソップ物語」でした。"
+            },
+
+            // Q1 解説 & 資料写真
+            {
+                id: 13, chapter: "第一章", title: "Q1 解説", pose: "greeting", notice: "Q1 解説",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-2 space-y-3">
+                        <h3 class="text-xl sm:text-2xl chalk-yellow font-chalk border-b border-emerald-600 pb-2">1. キリシタン文化ってなぁ〜に？ 【解説】</h3>
+                        <p class="text-sm sm:text-base chalk-text font-chalk leading-relaxed">天草コレジョで印刷された<span class="chalk-yellow font-bold">「イソップ物語（伊曽保物語）」</span>は、日本初の西洋式活字印刷機を使って日本語（ローマ字や和文）に翻訳・出版された歴史的価値の高い本です。</p>
+                    </div>
+                `,
+                speechText: "第一章のQ1解説です。活字印刷機で多くの本が出版されました。"
+            },
+            {
+                id: 14, chapter: "第一章", title: "Q1 資料写真", pose: "pointing", notice: "資料：天草コレジヨ館",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-2 space-y-2">
+                        <h3 class="text-base sm:text-lg chalk-yellow font-chalk mb-1">【資料】天草コレジョで印刷された「伊曽保物語」</h3>
+                        <div class="grid grid-cols-3 gap-2 max-w-lg mx-auto p-2 bg-black/20 rounded-xl">
+    <div class="overflow-hidden rounded-lg border border-amber-300/30 bg-black/40 flex flex-col">
+        <img src="images/8-7-1.jpg" alt="伊曽保物語 原本" class="w-full h-20 sm:h-28 object-cover">
+        <p class="text-[10px] sm:text-xs text-amber-100 font-chalk text-center py-1 px-0.5 truncate">▲伊曽保物語 原本</p>
+    </div>
+    <div class="overflow-hidden rounded-lg border border-amber-300/30 bg-black/40 flex flex-col">
+        <img src="images/8-7-2.jpg" alt="西洋式印刷機 全景" class="w-full h-20 sm:h-28 object-cover">
+        <p class="text-[10px] sm:text-xs text-amber-100 font-chalk text-center py-1 px-0.5 truncate">▲西洋式印刷機 全景</p>
+    </div>
+    <div class="overflow-hidden rounded-lg border border-amber-300/30 bg-black/40 flex flex-col">
+        <img src="images/8-7-3.jpg" alt="西洋式印刷機 拡大" class="w-full h-20 sm:h-28 object-cover">
+        <p class="text-[10px] sm:text-xs text-amber-100 font-chalk text-center py-1 px-0.5 truncate">▲西洋式印刷機 拡大</p>
+    </div>
+</div>
+                    </div>
+                `,
+                speechText: "当時の印刷技術や文化の広まりがよくわかりますね。"
+            },
+
+            // Q2 出題画面 (7-3.PNG)
+            {
+                id: 15, chapter: "第一章", title: "クイズ Q2", pose: "book", notice: "Q2. クイズ挑戦",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4 space-y-3">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk">1. キリシタン文化ってなぁ〜に？</p>
+                        <h3 class="text-base sm:text-lg chalk-yellow font-chalk mb-3">Q2. この時、天草にきた帆船（はんせん）を何と呼んでいたでしょう？</h3>
+                        <div class="space-y-2 max-w-xs pl-4">
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">① 日本丸</button>
+                            <button onclick="selectAnswer(true)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">② 南蛮船（なんばんせん）</button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">③ 南洋船（なんようせん）</button>
+                        </div>
+                    </div>
+                `,
+                speechText: "わかるかな？上のせんたくしから、ひとつえらんでクリックしてね。"
+            },
+
+            // Q2 〇×判定画面 (7-4-1.PNG)
+            {
+                id: 16, chapter: "第一章", title: "Q2 判定", pose: "normal", notice: "Q2 判定",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-sm sm:text-base chalk-text font-chalk mb-2">1. キリシタン文化ってなぁ〜に？</p>
+                        <h3 class="text-lg sm:text-xl chalk-yellow font-chalk mb-4">Q2. この時、天草にきた帆船（はんせん）を何と呼んでいたでしょう？</h3>
+                        <div id="q2-result-mark" class="text-6xl sm:text-7xl font-bold my-2"></div>
+                        <div id="q2-result-text" class="text-xl sm:text-2xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は2番の「南蛮船（なんばんせん）」でした。"
+            },
+
+            // Q3 前振り 1 (8-1.PNG)
+            { id: 17, chapter: "第一章", title: "Q3 前振り 1/2", pose: "normal", notice: "1. キリシタン文化ってなぁ〜に？", blackboardHTML: `<div class="w-full text-center my-auto px-4"><h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk">1. キリシタン文化ってなぁ〜に？</h3></div>`, speechText: "そのころの天草を支配していたのは、5人の豪族（ごうぞく）でした。" },
+
+            // Q3 前振り 2 (8-2.PNG)
+            { id: 18, chapter: "第一章", title: "Q3 前振り 2/2", pose: "pointing", notice: "1. キリシタン文化ってなぁ〜に？", blackboardHTML: `<div class="w-full text-center my-auto px-4"><h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk">1. キリシタン文化ってなぁ〜に？</h3></div>`, speechText: "「天草五人衆」と呼ばれた豪族は、大矢野（おおやの）、栖本（すもと）、上津浦（こうつうら）、志岐（しき）、〇〇です。" },
+
+            // Q3 問題準備 (8-3.PNG)
+            { id: 19, chapter: "第一章", title: "Q3 準備", pose: "normal", notice: "1. キリシタン文化ってなぁ〜に？", blackboardHTML: `<div class="w-full text-center my-auto px-4"><h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk">1. キリシタン文化ってなぁ〜に？</h3></div>`, speechText: "では、問題です。" },
+
+            // Q3 出題画面 (8-4.PNG)
+            {
+                id: 20, chapter: "第一章", title: "Q3 出題", pose: "book", notice: "1. キリシタン文化ってなぁ〜に？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4 space-y-3">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk">1. キリシタン文化ってなぁ〜に？</p>
+                        <h3 class="text-base sm:text-lg chalk-yellow font-chalk mb-3">Q3. 5人目の豪族（ごうぞく）の名前は何と言うでしょう？</h3>
+                        <div class="space-y-2 max-w-xs pl-4">
+                            <button onclick="selectAnswer(true)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">① 天草</button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">② 牛深</button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">③ 島原</button>
+                        </div>
+                    </div>
+                `,
+                speechText: "わかるかな？上のせんたくしから、ひとつえらんでクリックしてね。"
+            },
+
+            // Q3 解答画面 (8-5-1.PNG)
+            {
+                id: 21, chapter: "第一章", title: "Q3 判定", pose: "normal", notice: "1. キリシタン文化ってなぁ〜に？",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-sm sm:text-base chalk-text font-chalk mb-2">1. キリシタン文化ってなぁ〜に？</p>
+                        <h3 class="text-lg sm:text-xl chalk-yellow font-chalk mb-4">Q3. 5人目の豪族（ごうぞく）の名前は何と言うでしょう？</h3>
+                        <div id="q3-result-mark" class="text-6xl sm:text-7xl font-bold my-2"></div>
+                        <div id="q3-result-text" class="text-xl sm:text-2xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は1番の「天草」でした。"
+            },
+
+            // 第一章 全体解説 (8-8.PNG)
+            // 第一章 全体解説 (8-8.PNG 原稿全文)
+            {
+                id: 22,
+                chapter: "第一章",
+                title: "第一章 まとめ解説",
+                pose: "greeting",
+                notice: "1. キリシタン文化ってなぁ〜に？ 【解説】",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-1 sm:px-3 space-y-1.5 sm:space-y-2">
+                        <h3 class="text-base sm:text-lg chalk-yellow font-chalk border-b border-emerald-600 pb-1 mb-1">
+                            1. キリシタン文化ってなぁ〜に？ 【解説】
+                        </h3>
+                        <p class="text-xs sm:text-sm chalk-text font-chalk leading-snug sm:leading-relaxed">
+                            天草に<span class="text-red-400 font-bold">キリスト教</span>が入ってきたのは、戦国時代が終わりかけていたころでした。<span class="text-red-400 font-bold">ルイス・デ・アルメイダ</span>という宣教師（せんきょうし）がやってきてからです。
+                        </p>
+                        <p class="text-xs sm:text-sm chalk-text font-chalk leading-snug sm:leading-relaxed">
+                            そのころの天草は、<span class="text-sky-300 font-bold">大矢野（おおやの）</span>、<span class="text-sky-300 font-bold">栖本（すもと）</span>、<span class="text-sky-300 font-bold">上津浦（こうつうら）</span>、<span class="text-sky-300 font-bold">志岐（しき）</span>、<span class="text-sky-300 font-bold">天草（あまくさ）</span>の<span class="text-red-400 font-bold">5人の豪族</span>に支配されていました。このため、<span class="text-red-400 font-bold">キリスト教</span>の布教（ふきょう）を許可（きょか）することと引き換えに、鉄砲などを積んだ<span class="text-red-400 font-bold">南蛮船</span>の寄港を5人衆に願い出ました。
+                        </p>
+                        <p class="text-xs sm:text-sm chalk-text font-chalk leading-snug sm:leading-relaxed">
+                            <span class="text-red-400 font-bold">南蛮船</span>とは、当時、西洋人（ヨーロッパの人）を南蛮人と呼んでいたので、彼らが乗ってきた船を<span class="text-red-400 font-bold">南蛮船（なんばんせん）</span>と言っていました。そのころの船は、船の上に帆（ほ）をたくさん上げ、風の力を利用して海を走る帆船（はんせん）でした。
+                        </p>
+                    </div>
+                `,
+                speechText: "天草にキリスト教が広まり、南蛮貿易によってさまざまな文化が入ってきました。"
+            },
+
+            // 資料写真ページ (2枚並べ：1枚目は準備中の仮枠、2枚目は南蛮船模型)
+            {
+                id: 23,
+                chapter: "第一章",
+                title: "資料写真",
+                pose: "pointing",
+                notice: "資料：ルイス・デ・アルメイダ と 南蛮船",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-2 space-y-3">
+                        <h3 class="text-base sm:text-lg chalk-yellow font-chalk mb-2">
+                            【資料】宣教師と南蛮船（なんばんせん）
+                        </h3>
+                        <div class="grid grid-cols-2 gap-4 max-w-lg mx-auto p-3 bg-black/20 rounded-xl">
+                            <!-- 1枚目：準備中枠 -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-full h-32 sm:h-40 border-2 border-dashed border-amber-300/40 rounded-lg flex flex-col items-center justify-center bg-white/5 text-amber-200/60 p-2">
+                                    <i class="fa-regular fa-image text-3xl mb-1"></i>
+                                    <span class="text-xs font-chalk">ルイス・デ・アルメイダ</span>
+                                    <span class="text-[10px] text-amber-300/40">（準備中）</span>
+                                </div>
+                                <span class="text-xs chalk-text font-chalk mt-1.5">▲ ルイス・デ・アルメイダ</span>
+                            </div>
+
+                            <!-- 2枚目：南蛮船写真 -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-full h-32 sm:h-40 overflow-hidden rounded-lg border border-amber-300/40 bg-black/40">
+                                    <img src="images/8-8-2.jpg" alt="南蛮船（なんばんせん）" class="w-full h-full object-cover">
+                                </div>
+                                <span class="text-xs chalk-text font-chalk mt-1.5">▲ 南蛮船（なんばんせん）</span>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                speechText: "こちらが当時の宣教師と、海を渡ってきた南蛮船の資料写真です。"
+            },
+
+            // ==========================================
+            // 第二章：天草・島原の乱 (9-1 ～)
+            // ==========================================
+
+            // 第二章タイトル (9-1.PNG)
+            {
+                id: 24,
+                chapter: "第二章",
+                title: "第二章タイトル",
+                pose: "greeting",
+                notice: "第二章スタート",
+                blackboardHTML: `
+                    <div class="space-y-6 my-auto cursor-pointer" onclick="nextSlide()">
+                        <div class="bg-amber-400/20 text-amber-200 border border-amber-400/40 px-6 py-2 rounded-full text-sm sm:text-base font-chalk inline-block">
+                            ★ 第二章 ★
+                        </div>
+                        <h2 class="text-3xl sm:text-5xl font-bold text-red-400 font-chalk leading-tight">
+                            天草・島原の乱
+                        </h2>
+                        <p class="text-lg sm:text-xl chalk-text font-chalk pt-2 animate-pulse">
+                            画面をクリックしてね！
+                        </p>
+                    </div>
+                `,
+                speechText: "第二章、天草・島原の乱スタートします！"
+            },
+
+            // Q4 前振り 1 (9-2.PNG)
+            {
+                id: 25,
+                chapter: "第二章",
+                title: "Q4 前振り 1/4",
+                pose: "pointing",
+                notice: "2. 天草・島原の乱",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            2. 天草・島原の乱
+                        </h3>
+                    </div>
+                `,
+                speechText: "その後、キリスト教が禁止になり、天草や島原では、今の税金にあたる「年貢（ねんぐ）」の取り立てがきびしく行われました。"
+            },
+
+            // Q4 前振り 2 (9-3.PNG)
+            {
+                id: 26,
+                chapter: "第二章",
+                title: "Q4 前振り 2/4",
+                pose: "normal",
+                notice: "2. 天草・島原の乱",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            2. 天草・島原の乱
+                        </h3>
+                    </div>
+                `,
+                speechText: "そのため、天草・島原の人たちは、がまんできなくなって、とうとう一揆（いっき）を起こしました。"
+            },
+
+            // Q4 前振り 3 (9-4.PNG)
+            {
+                id: 27,
+                chapter: "第二章",
+                title: "Q4 前振り 3/4",
+                pose: "normal",
+                notice: "2. 天草・島原の乱",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            2. 天草・島原の乱
+                        </h3>
+                    </div>
+                `,
+                speechText: "これが「天草・島原の乱」です。"
+            },
+
+            // Q4 前振り 4 (9-5.PNG)
+            {
+                id: 28,
+                chapter: "第二章",
+                title: "Q4 前振り 4/4",
+                pose: "normal",
+                notice: "2. 天草・島原の乱",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            2. 天草・島原の乱
+                        </h3>
+                    </div>
+                `,
+                speechText: "では、問題です。黒板に表示されるよ。"
+            },
+
+            // Q4 出題画面 (9-6.PNG)
+            {
+                id: 29,
+                chapter: "第二章",
+                title: "クイズ Q4",
+                pose: "book",
+                notice: "Q4. クイズ挑戦",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4 space-y-3">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk">2. 天草・島原の乱</p>
+                        <h3 class="text-base sm:text-lg chalk-yellow font-chalk mb-3">
+                            Q4. 天草・島原の乱の時、農民たちが立てこもったお城はどこでしょう？
+                        </h3>
+                        <div class="space-y-2 max-w-xs pl-4">
+                            <button onclick="selectAnswer(true)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">
+                                ① 原城
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">
+                                ② 富岡城
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">
+                                ③ 熊本城
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "わかるかな？上のせんたくしから、ひとつえらんでクリックしてね。"
+            },
+
+            // Q4 〇×判定画面 (9-7-1.PNG)
+            {
+                id: 30,
+                chapter: "第二章",
+                title: "Q4 判定",
+                pose: "pointing",
+                notice: "Q4 判定",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-sm sm:text-base chalk-text font-chalk mb-2">2. 天草・島原の乱</p>
+                        <h3 class="text-lg sm:text-xl chalk-yellow font-chalk mb-4">
+                            Q4. 天草・島原の乱の時、農民たちが立てこもったお城はどこでしょう？
+                        </h3>
+                        <div id="q4-result-mark" class="text-6xl sm:text-7xl font-bold my-2"></div>
+                        <div id="q4-result-text" class="text-xl sm:text-2xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は1番の「原城」でした。クリックで次の問題にいくよ。"
+            },
+
+            // Q5 出題画面 (10-1.PNG)
+            {
+                id: 31,
+                chapter: "第二章",
+                title: "クイズ Q5",
+                pose: "book",
+                notice: "Q5. クイズ挑戦",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4 space-y-3">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk">2. 天草・島原の乱</p>
+                        <h3 class="text-base sm:text-lg chalk-yellow font-chalk mb-3">
+                            Q5. 天草・島原の乱の時、一揆（いっき）のリーダーはだれでしょう？
+                        </h3>
+                        <div class="space-y-2 max-w-xs pl-4">
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">
+                                ① 島原太郎（しまばらたろう）
+                            </button>
+                            <button onclick="selectAnswer(true)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">
+                                ② 天草四郎（あまくさしろう）
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">
+                                ③ 徳川家康（とくがわいえやす）
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "わかるかな？上のせんたくしから、ひとつえらんでクリックしてね。"
+            },
+
+            // Q5 判定画面 (10-2-1.PNG)
+            {
+                id: 32,
+                chapter: "第二章",
+                title: "Q5 判定",
+                pose: "pointing",
+                notice: "Q5 判定",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-sm sm:text-base chalk-text font-chalk mb-2">2. 天草・島原の乱</p>
+                        <h3 class="text-lg sm:text-xl chalk-yellow font-chalk mb-4">
+                            Q5. 天草・島原の乱の時、一揆（いっき）のリーダーはだれでしょう？
+                        </h3>
+                        <div id="q5-result-mark" class="text-6xl sm:text-7xl font-bold my-2"></div>
+                        <div id="q5-result-text" class="text-xl sm:text-2xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は2番の「天草四郎（あまくさしろう）」でした。クリックでつぎにすすもう！"
+            },
+
+            // ★【新規追加】Q5 解説・資料画像スライド (12-1.PNG)
+            {
+                id: 33,
+                chapter: "第二章",
+                title: "Q5 解説：天草・島原の乱",
+                pose: "normal",
+                notice: "2. 天草・島原の乱 解説",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-between p-2 sm:p-4 text-white">
+                        <div>
+                            <p class="text-xs sm:text-sm chalk-text font-chalk mb-1">2. 天草・島原の乱</p>
+                            <h3 class="text-base sm:text-lg font-bold text-yellow-300 font-chalk mb-2">【 解 説 】</h3>
+                            <p class="text-xs sm:text-sm leading-relaxed font-chalk text-gray-100">
+                                天草や島原では今の税金（ぜいきん）にあたる「<span class="text-red-400 font-bold">年貢（ねんぐ）</span>」の取り立てが厳（きび）しく、農民たちががまんできなくなって一揆（いっき）を起こしたのが、「<span class="text-red-400 font-bold">天草・島原の乱</span>」です。<span class="text-red-400 font-bold">天草四郎</span>をリーダーに島原の<span class="text-red-400 font-bold">原城</span>に立てこもりましたが、幕府軍に負けてほとんどの人たちが亡くなりました。
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 mt-2 items-end">
+                            <!-- 左側画像（準備中のため空枠枠線のみ） -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-full h-24 sm:h-32 bg-emerald-900/40 border border-dashed border-emerald-400/50 rounded flex items-center justify-center text-xs text-emerald-200">
+                                    （原城遠望 画像準備中）
+                                </div>
+                                <span class="text-xs font-chalk mt-1 text-gray-300">▲ 原城遠望</span>
+                            </div>
+                            <!-- 右側画像（天草四郎像 12-1-2.jpg） -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-full h-24 sm:h-32 rounded overflow-hidden shadow-md border border-white/20">
+                                    <img src="images/12-1-2.jpg" alt="天草四郎像" class="w-full h-full object-cover">
+                                </div>
+                                <span class="text-xs font-chalk mt-1 text-gray-300">▲ 天草四郎像</span>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                speechText: "天草・島原の乱についての解説だよ。しっかり確認しておこう！"
+            },
+
+            // Q6 前振り 1 (11-1.PNG)
+            {
+                id: 34,
+                chapter: "第二章",
+                title: "Q6 前振り 1/4",
+                pose: "pointing",
+                notice: "2. 天草・島原の乱",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            2. 天草・島原の乱
+                        </h3>
+                    </div>
+                `,
+                speechText: "天草・島原の乱のおと、日本はキリスト教を封（ふう）じるために、外国との交流をやめて国を閉ざす鎖国（さこく）時代になりました。"
+            },
+
+            // Q6 前振り 2 (11-2.PNG)
+            {
+                id: 35,
+                chapter: "第二章",
+                title: "Q6 前振り 2/4",
+                pose: "normal",
+                notice: "2. 天草・島原の乱",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            2. 天草・島原の乱
+                        </h3>
+                    </div>
+                `,
+                speechText: "鎖国は明治時代になるまで続きました。"
+            },
+
+            // Q6 前振り 3 (11-3.PNG)
+            {
+                id: 36,
+                chapter: "第二章",
+                title: "Q6 前振り 3/4",
+                pose: "normal",
+                notice: "2. 天草・島原の乱",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            2. 天草・島原の乱
+                        </h3>
+                    </div>
+                `,
+                speechText: "しかし、日本が鎖国をしている間でも、交流がゆるされた国もあります。中国とオランダです。"
+            },
+
+            // Q6 前振り 4 (11-4.PNG)
+            {
+                id: 37,
+                chapter: "第二章",
+                title: "Q6 前振り 4/4",
+                pose: "normal",
+                notice: "2. 天草・島原の乱",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            2. 天草・島原の乱
+                        </h3>
+                    </div>
+                `,
+                speechText: "では、問題です。"
+            },
+
+            // Q6 出題画面 (11-5.PNG)
+            {
+                id: 38,
+                chapter: "第二章",
+                title: "クイズ Q6",
+                pose: "book",
+                notice: "Q6. クイズ挑戦",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4 space-y-3">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk">2. 天草・島原の乱</p>
+                        <h3 class="text-base sm:text-lg chalk-yellow font-chalk mb-3">
+                            Q6. 中国やオランダの船が来ていた日本の場所はどこでしょう？
+                        </h3>
+                        <div class="space-y-2 max-w-xs pl-4">
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">
+                                ① 横浜
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">
+                                ② 神戸
+                            </button>
+                            <button onclick="selectAnswer(true)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">
+                                ③ 長崎
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "わかるかな？上のせんたくしから、ひとつえらんでクリックしてね。"
+            },
+
+            // Q6 判定画面 (11-6-1.PNG)
+            {
+                id: 39,
+                chapter: "第二章",
+                title: "Q6 判定",
+                pose: "pointing",
+                notice: "Q6 判定",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-sm sm:text-base chalk-text font-chalk mb-2">2. 天草・島原の乱</p>
+                        <h3 class="text-lg sm:text-xl chalk-yellow font-chalk mb-4">
+                            Q6. 中国やオランダの船が来ていた日本の場所はどこでしょう？
+                        </h3>
+                        <div id="q6-result-mark" class="text-6xl sm:text-7xl font-bold my-2"></div>
+                        <div id="q6-result-text" class="text-xl sm:text-2xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は3番の「長崎」でした。"
+            },
+        
+            // Q6 解説スライド (12-2-1.jpg / 12-2-2.jpg 個別画像使用)
+            {
+                id: 40,
+                chapter: "第二章",
+                title: "Q6 解説：鎖国と長崎",
+                pose: "normal",
+                notice: "2. 天草・島原の乱 解説",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-between p-2 sm:p-4 text-white">
+                        <div>
+                            <p class="text-xs sm:text-sm chalk-text font-chalk mb-1">2. 天草・島原の乱</p>
+                            <h3 class="text-base sm:text-lg font-bold text-yellow-300 font-chalk mb-2">【 解 説 】</h3>
+                            <p class="text-xs sm:text-sm leading-relaxed font-chalk text-gray-100">
+                                その後、幕府は<span class="text-red-400 font-bold">キリスト教</span>が広まるのをおそれ、外国との交流をやめる<span class="text-red-400 font-bold">鎖国（さこく）政策</span>を明治維新（日本の開国）までとりました。<br>
+                                ただ、中国とオランダとの貿易窓口として<span class="text-red-400 font-bold">長崎の出島（でじま）</span>だけが交流をゆるされました。
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 mt-2 items-end">
+                            <!-- 左側画像（出島） -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-full h-24 sm:h-32 rounded overflow-hidden shadow-md border border-white/20 bg-black/20">
+                                    <img src="images/12-2-1.jpg" alt="出島" class="w-full h-full object-cover">
+                                </div>
+                                <span class="text-xs font-chalk mt-1 text-gray-300">▲ 出島</span>
+                            </div>
+                            <!-- 右側画像（鎖国時代 開国風景） -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-full h-24 sm:h-32 rounded overflow-hidden shadow-md border border-white/20 bg-black/20">
+                                    <img src="images/12-2-2.jpg" alt="鎖国時代(開国風景)" class="w-full h-full object-cover">
+                                </div>
+                                <span class="text-xs font-chalk mt-1 text-gray-300">▲ 鎖国時代（開国風景）</span>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                speechText: "鎖国や出島についての解説だよ。写真や絵と一緒にしっかり覚えておこう！"
+            },
+
+            // 第三章 タイトル画面 (13-1.PNG)
+            {
+                id: 41,
+                chapter: "第三章",
+                title: "第三章 タイトル",
+                pose: "normal",
+                notice: "第三章",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4 space-y-4">
+                        <h2 class="text-xl sm:text-2xl font-bold chalk-text font-chalk">第三章</h2>
+                        <h1 class="text-2xl sm:text-4xl font-extrabold text-red-400 font-chalk tracking-wide">
+                            私、鈴木重成とは？
+                        </h1>
+                        <p class="text-sm sm:text-base text-gray-200 font-chalk mt-6 animate-pulse">
+                            画面をクリックしてね！
+                        </p>
+                    </div>
+                `,
+                speechText: "ここからは第三章「私、鈴木重成とは？」に入るよ！"
+            },
+
+            // Q7 前振り 1 (13-2.PNG)
+            {
+                id: 42,
+                chapter: "第三章",
+                title: "Q7 前振り 1/3",
+                pose: "normal",
+                notice: "3. 私、鈴木重成とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            3. 私、鈴木重成とは？
+                        </h3>
+                    </div>
+                `,
+                speechText: "さて、天草の歴史が少しはわかったかな？"
+            },
+
+            // Q7 前振り 2 (13-3.PNG)
+            {
+                id: 43,
+                chapter: "第三章",
+                title: "Q7 前振り 2/3",
+                pose: "normal",
+                notice: "3. 私、鈴木重成とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            3. 私、鈴木重成とは？
+                        </h3>
+                    </div>
+                `,
+                speechText: "これからは、「天草・島原の乱」で荒れはてた天草をたて直すために命をかけた私の仕事について勉強して下さい。"
+            },
+
+            // Q7 前振り 3 (13-4.PNG)
+            {
+                id: 44,
+                chapter: "第三章",
+                title: "Q7 前振り 3/3",
+                pose: "normal",
+                notice: "3. 私、鈴木重成とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-2xl sm:text-3xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            3. 私、鈴木重成とは？
+                        </h3>
+                    </div>
+                `,
+                speechText: "問題です。黒板に表示されるよ。"
+            },
+
+            // Q7 出題画面 (13-5.PNG)
+            {
+                id: 45,
+                chapter: "第三章",
+                title: "クイズ Q7",
+                pose: "book",
+                notice: "Q7. クイズ挑戦",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4 space-y-3">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk">3. 私、鈴木重成とは？</p>
+                        <h3 class="text-base sm:text-lg chalk-yellow font-chalk mb-3">
+                            Q7. 私は、天草を管理（かんり）していましたが、何と呼ばれていたでしょう？
+                        </h3>
+                        <div class="space-y-2 max-w-xs pl-4">
+                            <button onclick="selectAnswer(true)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">
+                                ① 代官
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">
+                                ② 知事
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">
+                                ③ 大統領
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "わかるかな？上のせんたくしから、ひとつえらんでクリックしてね。"
+            },
+
+            // Q7 判定画面 (13-6-1.PNG)
+            {
+                id: 46,
+                chapter: "第三章",
+                title: "Q7 判定",
+                pose: "pointing",
+                notice: "Q7 判定",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-sm sm:text-base chalk-text font-chalk mb-2">3. 私、鈴木重成とは？</p>
+                        <h3 class="text-lg sm:text-xl chalk-yellow font-chalk mb-4">
+                            Q7. 私は、天草を管理（かんり）していましたが、何と呼ばれていたでしょう？
+                        </h3>
+                        <div id="q7-result-mark" class="text-6xl sm:text-7xl font-bold my-2"></div>
+                        <div id="q7-result-text" class="text-xl sm:text-2xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は1番の「代官」でした。クリックで次の問題にいくよ。"
+            },
+
+            // Q8 出題画面 (14-1.PNG)
+            {
+                id: 47,
+                chapter: "第三章",
+                title: "クイズ Q8",
+                pose: "book",
+                notice: "Q8. クイズ挑戦",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4 space-y-3">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk">3. 私、鈴木重成とは？</p>
+                        <h3 class="text-base sm:text-lg chalk-yellow font-chalk mb-3">
+                            Q8. 私は、三河国（みかわのくに）の足助荘（あすけのしょう）で生まれましたが、今でいう何県でしょう？
+                        </h3>
+                        <div class="space-y-2 max-w-xs pl-4">
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">
+                                ① 熊本県
+                            </button>
+                            <button onclick="selectAnswer(true)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">
+                                ② 愛知県
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-sm sm:text-base transition">
+                                ③ 長崎県
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "わかるかな？上のせんたくしから、ひとつえらんでクリックしてね。"
+            },
+
+            // Q8 判定画面 (14-2-1.PNG)
+            {
+                id: 48,
+                chapter: "第三章",
+                title: "Q8 判定",
+                pose: "pointing",
+                notice: "Q8 判定",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-sm sm:text-base chalk-text font-chalk mb-2">3. 私、鈴木重成とは？</p>
+                        <h3 class="text-lg sm:text-xl chalk-yellow font-chalk mb-4">
+                            Q8. 私は、三河国（みかわのくに）の足助荘（あすけのしょう）で生まれましたが、今でいう何県でしょう？
+                        </h3>
+                        <div id="q8-result-mark" class="text-6xl sm:text-7xl font-bold my-2"></div>
+                        <div id="q8-result-text" class="text-xl sm:text-2xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は2番の「愛知県」でした。クリックで次の問題だよ。"
+            },
+
+            // Q9 出題画面 (15-1.PNG)
+            {
+                id: 49,
+                chapter: "第三章",
+                title: "クイズ Q9",
+                pose: "book",
+                notice: "Q9. クイズ挑戦",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4 space-y-3">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk">3. 私、鈴木重成とは？</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2 leading-snug">
+                            Q9. 私と一緒に天草に来て、仏教の教えを説いて人々の心を救ったといわれる私のお兄さんの名前は何でしょう？
+                        </h3>
+                        <div class="space-y-1.5 max-w-xs pl-4">
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ① 正一（しょういち）
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ② 正二（しょうじ）
+                            </button>
+                            <button onclick="selectAnswer(true)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ③ 正三（しょうさん）
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "わかるかな？上のせんたくしから、ひとつえらんでクリックしてね。"
+            },
+
+            // Q9 判定画面 (15-2-1.PNG)
+            {
+                id: 50,
+                chapter: "第三章",
+                title: "Q9 判定",
+                pose: "pointing",
+                notice: "Q9 判定",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-sm sm:text-base chalk-text font-chalk mb-1">3. 私、鈴木重成とは？</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2">
+                            Q9. 私と一緒に天草に来て、仏教の教えを説いて人々の心を救ったといわれる私のお兄さんの名前は何でしょう？
+                        </h3>
+                        <div id="q9-result-mark" class="text-5xl sm:text-6xl font-bold my-1"></div>
+                        <div id="q9-result-text" class="text-lg sm:text-xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は3番の「正三（しょうさん）」でした。"
+            },
+
+            // 解説 1/2 (16-1.PNG ベース)
+            {
+                id: 51,
+                chapter: "第三章",
+                title: "解説 1/2",
+                pose: "explaining",
+                notice: "3. 私、鈴木重成とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-2 sm:px-4 space-y-2 text-xs sm:text-sm chalk-text font-chalk leading-relaxed">
+                        <p class="chalk-yellow text-sm sm:text-base font-bold mb-1">【 解説 1/2 】</p>
+                        <p>
+                            「天草・島原の乱」から3年後、天草は幕府が直接管理する<span class="chalk-yellow">「天領（てんりょう）」</span>になりました。
+                        </p>
+                        <p>
+                            天草が天領になったのは、キリシタンが天草からいなくなるように見張ること、荒れはてた天草をたて直すこと、などの目的があったからです。
+                        </p>
+                        <p>
+                            鈴木重成公は、幕府がおさめる「天領・天草」の<span class="text-red-400 font-bold">最初の代官</span>として、荒れはてた天草を復興（ふっこう）させるためにやってきました。
+                        </p>
+                    </div>
+                `,
+                speechText: "天草は幕府の直接管理する「天領」になり、私は最初の代官として復興のために派遣されたんだよ。"
+            },
+
+            // 解説 2/2 (16-2.PNG ベース)
+            {
+                id: 52,
+                chapter: "第三章",
+                title: "解説 2/2",
+                pose: "explaining",
+                notice: "3. 私、鈴木重成とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-2 sm:px-4 space-y-2 text-xs sm:text-sm chalk-text font-chalk leading-relaxed">
+                        <p class="chalk-yellow text-sm sm:text-base font-bold mb-1">【 解説 2/2 】</p>
+                        <p>
+                            鈴木重成公の出身地、三河国（みかわのくに）の足助荘（あすけのしょう）は、今の愛知県です。
+                        </p>
+                        <p>
+                            天草をすくったといわれる<span class="chalk-yellow font-bold">「鈴木三公」</span>とは、初代代官の<span class="text-red-400 font-bold">鈴木重成公</span>、そのお兄さんで仏教のお坊さんとして人々の心をささえた<span class="text-red-400 font-bold">鈴木正三公</span>、そして二人の意思をつぎ天草の石高を半減させた<span class="text-red-400 font-bold">鈴木重辰公</span>の三人のことです。
+                        </p>
+                    </div>
+                `,
+                speechText: "私だけでなく、兄の正三、そして跡を継いだ重辰の三人合わせて「鈴木三公」と呼ばれているんだ。"
+            },
+
+            // 資料写真スライド（横並び配置）
+            {
+                id: 53,
+                chapter: "第三章",
+                title: "資料写真",
+                pose: "pointing",
+                notice: "資料：鈴木重成像と鈴木三公",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-2 space-y-2">
+                        <p class="chalk-yellow text-xs sm:text-sm font-chalk mb-1">【 関連資料写真 】</p>
+                        <div class="grid grid-cols-2 gap-3 max-w-md mx-auto items-center">
+                            <!-- 鈴木重成像 -->
+                            <div class="bg-black/30 p-2 rounded border border-emerald-600/50 flex flex-col items-center">
+                                <img src="images/16-1-1.jpg" alt="鈴木重成像" class="h-32 sm:h-40 object-contain rounded mb-1 shadow">
+                                <p class="text-[10px] sm:text-xs chalk-text font-chalk">▲ 鈴木重成像</p>
+                            </div>
+                            <!-- 鈴木三公 -->
+                            <div class="bg-black/30 p-2 rounded border border-emerald-600/50 flex flex-col items-center">
+                                <img src="images/16-2-1.jpg" alt="鈴木三公" class="h-32 sm:h-40 object-contain rounded mb-1 shadow">
+                                <p class="text-[10px] sm:text-xs chalk-text font-chalk">▲ 鈴木三公像</p>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                speechText: "こちらが私の石像と、私・兄の正三・重辰の「鈴木三公」が描かれた肖像画だよ！"
+            },
+
+            // 第四章 タイトル画面 (17-1.PNG)
+            {
+                id: 54,
+                chapter: "第四章",
+                title: "第四章 タイトル",
+                pose: "normal",
+                notice: "第四章",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4 space-y-4">
+                        <h2 class="text-xl sm:text-2xl font-bold chalk-text font-chalk">第四章</h2>
+                        <h1 class="text-2xl sm:text-4xl font-extrabold text-red-400 font-chalk tracking-wide">
+                            私、鈴木重成が行った仕事とは？
+                        </h1>
+                        <p class="text-sm sm:text-base text-gray-200 font-chalk mt-6 animate-pulse">
+                            画面をクリックしてね！
+                        </p>
+                    </div>
+                `,
+                speechText: "ここからは第四章「私、鈴木重成が行った仕事とは？」に入るよ！"
+            },
+
+            // Q10 前振り 1 (17-2.PNG)
+            {
+                id: 55,
+                chapter: "第四章",
+                title: "Q10 前振り 1/3",
+                pose: "normal",
+                notice: "4. 私、鈴木重成が行った仕事とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-xl sm:text-2xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            4. 私、鈴木重成が行った仕事とは？
+                        </h3>
+                    </div>
+                `,
+                speechText: "私は、代官だからといってい張ったりせず、荒れはてた天草をなんとか昔のように美しい島にもどして、人々が幸せにくらせるようにと、しんけんに取り組み始めました。"
+            },
+
+            // Q10 前振り 2 (17-3.PNG)
+            {
+                id: 56,
+                chapter: "第四章",
+                title: "Q10 前振り 2/3",
+                pose: "pointing",
+                notice: "4. 私、鈴木重成が行った仕事とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-xl sm:text-2xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            4. 私、鈴木重成が行った仕事とは？
+                        </h3>
+                    </div>
+                `,
+                speechText: "まず、天草全土をおさめるために、行政（ぎょうせい）のしくみをととのえました。"
+            },
+
+            // Q10 前振り 3 (17-4.PNG)
+            {
+                id: 57,
+                chapter: "第四章",
+                title: "Q10 前振り 3/3",
+                pose: "book",
+                notice: "4. 私、鈴木重成が行った仕事とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-xl sm:text-2xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            4. 私、鈴木重成が行った仕事とは？
+                        </h3>
+                    </div>
+                `,
+                speechText: "では、問題です。黒板に表示されるよ。"
+            },
+
+            // Q10 出題画面 (17-5.PNG)
+            {
+                id: 58,
+                chapter: "第四章",
+                title: "クイズ Q10",
+                pose: "book",
+                notice: "Q10. クイズ挑戦",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4 space-y-3">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk">4. 私、鈴木重成が行った仕事とは？</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2 leading-snug">
+                            Q10. 私は、お城と代官所があるところを「町」に決めました。それは天草のどこだったでしょう？
+                        </h3>
+                        <div class="space-y-1.5 max-w-xs pl-4">
+                            <button onclick="selectAnswer(true)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ① 富岡
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ② 本渡
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ③ 牛深
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "わかるかな？上のせんたくしから、ひとつえらんでクリックしてね。"
+            },
+
+            // Q10 判定画面 (17-6-1.PNG)
+            {
+                id: 59,
+                chapter: "第四章",
+                title: "Q10 判定",
+                pose: "pointing",
+                notice: "Q10 判定",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk mb-1">4. 私、鈴木重成が行った仕事とは？</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2">
+                            Q10. 私は、お城と代官所があるところを「町」に決めました。それは天草のどこだったでしょう？
+                        </h3>
+                        <div id="q10-result-mark" class="text-5xl sm:text-6xl font-bold my-1"></div>
+                        <div id="q10-result-text" class="text-lg sm:text-xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は1番の「富岡」でした。クリックで次の問題だよ。"
+            },
+
+            // Q11 出題画面 (18-1.PNG)
+            {
+                id: 60,
+                chapter: "第四章",
+                title: "クイズ Q11",
+                pose: "book",
+                notice: "Q11. クイズ挑戦",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4 space-y-2">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk">4. 私、鈴木重成が行った仕事とは？</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2 leading-snug">
+                            Q11. また、外国船が来るのにそなえて、天草西海岸ぞいにれんらくが取れるしくみをつくりました。このしくみはなんでしょう？
+                        </h3>
+                        <div class="space-y-1.5 max-w-xs pl-4">
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ① 電話
+                            </button>
+                            <button onclick="selectAnswer(true)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ② のろし
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ③ メール
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "わかるかな？上のせんたくしから、ひとつえらんでクリックしてね。"
+            },
+
+            // Q11 判定画面 (18-2-1.PNG)
+            {
+                id: 61,
+                chapter: "第四章",
+                title: "Q11 判定",
+                pose: "pointing",
+                notice: "Q11 判定",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk mb-1">4. 私、鈴木重成が行った仕事とは？</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2">
+                            Q11. また、外国船が来るのにそなえて、天草西海岸ぞいにれんらくが取れるしくみをつくりました。このしくみはなんでしょう？
+                        </h3>
+                        <div id="q11-result-mark" class="text-5xl sm:text-6xl font-bold my-1"></div>
+                        <div id="q11-result-text" class="text-lg sm:text-xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は2番の「のろし」でした。"
+            },
+
+            // 第四章 Q10・11 くわしい解説 (19-1.jpg)
+            {
+                id: 62,
+                chapter: "第四章",
+                title: "第四章 くわしい解説",
+                pose: "normal",
+                notice: "4. 私、鈴木重成が行った仕事とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-3 sm:px-4 space-y-2 leading-relaxed">
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk border-b border-emerald-600 pb-1 mb-1">
+                            【解説】
+                        </h3>
+                        <p class="text-xs sm:text-sm chalk-text font-chalk">
+                            天草全体を86の村に分け、それぞれの村には<span class="text-red-400 font-bold">庄屋（しょうや）</span>というリーダーをおきました。さらに、村々を10組にグループ分けして、各組には庄屋をまとめる<span class="text-red-400 font-bold">大庄屋（おおじょうや）</span>を置いたのです。また、天草が天領になる前から富岡にはお城があり、重成公はその近くに代官所をおいて、町としました。
+                        </p>
+                        <p class="text-xs sm:text-sm chalk-text font-chalk">
+                            天草は周りを海に囲まれて、長崎にも近かったため、よく外国の船が近づいてくることがありました。そのため、天草西海岸の富岡（とみおか）、大江（おおえ）、魚貫（おにおに）に「<span class="text-red-400 font-bold">遠見番所（とおみばんしょ）</span>」をもうけて、外国船が来たら、のろしを上げて知らせました。
+                        </p>
+                    </div>
+                `,
+                speechText: "天草の行政のしくみと、外国船にそなえた遠見番所について詳しく説明するね。"
+            },
+
+            // 第四章 資料写真 (19-1-1.jpg, 19-1-2.jpg)
+            {
+                id: 63,
+                chapter: "第四章",
+                title: "第四章 資料写真",
+                pose: "pointing",
+                notice: "資料写真",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-2">
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-3">【関連写真】</h3>
+                        <div class="flex justify-center items-end gap-3 sm:gap-6">
+                            <div class="text-center">
+                                <img src="images/19-1-1.png" alt="天草西海岸" class="max-h-32 sm:max-h-44 object-contain rounded border-2 border-white/20 shadow-md">
+                                <p class="text-xs sm:text-sm chalk-text font-chalk mt-1 text-emerald-200">▲ 天草西海岸</p>
+                            </div>
+                            <div class="text-center">
+                                <img src="images/19-1-2.jpg" alt="遠見番所跡" class="max-h-32 sm:max-h-44 object-contain rounded border-2 border-white/20 shadow-md">
+                                <p class="text-xs sm:text-sm chalk-text font-chalk mt-1 text-emerald-200">▲ 遠見番所跡</p>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                speechText: "これが天草の美しい西海岸と、外国船を見張っていた遠見番所の跡だよ。"
+            },
+
+            // 第五章 タイトル画面 (20-1.PNG)
+            {
+                id: 64,
+                chapter: "第五章",
+                title: "第五章 タイトル",
+                pose: "normal",
+                notice: "第五章",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4 space-y-4">
+                        <h2 class="text-xl sm:text-2xl font-bold chalk-text font-chalk">第五章</h2>
+                        <h1 class="text-2xl sm:text-4xl font-extrabold text-red-400 font-chalk tracking-wide">
+                            私たち兄弟が行った仕事とは？
+                        </h1>
+                        <p class="text-sm sm:text-base text-gray-200 font-chalk mt-6 animate-pulse">
+                            画面をクリックしてね！
+                        </p>
+                    </div>
+                `,
+                speechText: "ここからは第五章「私たち兄弟が行った仕事とは？」に入るよ！"
+            },
+
+            // Q12 前振り 1 (20-2.PNG)
+            {
+                id: 65,
+                chapter: "第五章",
+                title: "Q12 前振り 1/3",
+                pose: "normal",
+                notice: "5. 私たち兄弟が行った仕事とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-xl sm:text-2xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            5. 私たち兄弟が行った仕事とは？
+                        </h3>
+                    </div>
+                `,
+                speechText: "荒れはてた天草の人々の心をいやすために、私や正三和尚（おしょう）が行ったのは、人々の心の安定を願って、仏による供養（くよう）を行い、"
+            },
+
+            // Q12 前振り 2 (20-3.PNG)
+            {
+                id: 66,
+                chapter: "第五章",
+                title: "Q12 前振り 2/3",
+                pose: "open_hands",
+                notice: "5. 私たち兄弟が行った仕事とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-xl sm:text-2xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            5. 私たち兄弟が行った仕事とは？
+                        </h3>
+                    </div>
+                `,
+                speechText: "また、乱で打ちこわしや焼きはらいにあった神社、寺院を新しくたてたりしました。"
+            },
+
+            // Q12 前振り 3 (20-4.PNG)
+            {
+                id: 67,
+                chapter: "第五章",
+                title: "Q12 前振り 3/3",
+                pose: "book",
+                notice: "5. 私たち兄弟が行った仕事とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-xl sm:text-2xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            5. 私たち兄弟が行った仕事とは？
+                        </h3>
+                    </div>
+                `,
+                speechText: "では、問題です。黒板に表示されるよ。"
+            },
+
+            // Q12 出題画面 (20-5.PNG)
+            {
+                id: 68,
+                chapter: "第五章",
+                title: "クイズ Q12",
+                pose: "book",
+                notice: "Q12. クイズ挑戦",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4 space-y-2">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk">5. 私たち兄弟が行った仕事とは？</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2 leading-snug">
+                            Q12. 私が三河（みかわ）から持ってきて、天草で最初に建てた円通寺（えんつうじ）にまつり、今は苓北町（れいほくまち）の国照寺（こくしょうじ）におかれている仏様は、「1仏○○菩薩像」といいます。○○にはいる数字はなんでしょう？
+                        </h3>
+                        <div class="space-y-1.5 max-w-xs pl-4">
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ① 10
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ② 20
+                            </button>
+                            <button onclick="selectAnswer(true)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ③ 25
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "わかるかな？上のせんたくしから、ひとつえらんでクリックしてね。"
+            },
+
+            // Q12 判定画面 (20-6-1.PNG)
+            {
+                id: 69,
+                chapter: "第五章",
+                title: "Q12 判定",
+                pose: "pointing",
+                notice: "Q12 判定",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk mb-1">5. 私たち兄弟が行った仕事とは？</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2">
+                            Q12. 私が三河（みかわ）から持ってきて、天草で最初に建てた円通寺（えんつうじ）にまつり、今は苓北町（れいほくまち）の国照寺（こくしょうじ）におかれている仏様は、「1仏○○菩薩像」といいます。○○にはいる数字はなんでしょう？
+                        </h3>
+                        <div id="q12-result-mark" class="text-5xl sm:text-6xl font-bold my-1"></div>
+                        <div id="q12-result-text" class="text-lg sm:text-xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は3番の「25」でした。"
+            },
+
+            // 第五章 Q12 解説・資料写真 一体型スライド (24-1.PNG / 24-1-1.jpg)
+            {
+                id: 70,
+                chapter: "第五章",
+                title: "第五章 解説と資料",
+                pose: "pointing",
+                notice: "5. 私たち兄弟が行った仕事とは？",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center px-2 py-1">
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk border-b border-emerald-600 pb-1 mb-2">
+                            【解説】
+                        </h3>
+                        <div class="grid grid-cols-12 gap-3 items-center">
+                            <!-- 解説文章 -->
+                            <div class="col-span-7 text-left space-y-1.5 leading-relaxed">
+                                <p class="text-xs sm:text-sm chalk-text font-chalk">
+                                    鈴木重成公や正三和尚は、荒れはてた天草島民の心をいやすためには、祈りしかないとの考えから、一揆（いっき）のぎせいしゃを供養（くよう）するため、三河（みかわ）から「<span class="text-red-400 font-bold">1仏25菩薩像</span>」を運びました。
+                                </p>
+                                <p class="text-xs sm:text-sm chalk-text font-chalk">
+                                    また、<span class="text-sky-300 font-bold">神社</span>、<span class="text-sky-300 font-bold">寺院</span>を新しくたてたりするために、年貢（ねんぐ）の一部をこの費用にあてました。今でいう公共投資（こうきょうとうし）です。
+                                </p>
+                            </div>
+                            <!-- 資料写真 -->
+                            <div class="col-span-5 text-center">
+                                <img src="images/24-1-1.jpg" alt="1仏25菩薩像" class="max-h-36 sm:max-h-48 mx-auto object-contain rounded border-2 border-white/20 shadow-md">
+                                <p class="text-xs sm:text-sm chalk-text font-chalk mt-1 text-emerald-200">▲ 1仏25菩薩像</p>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                speechText: "1仏25菩薩像についてと、神社や寺院を建てた公共投資についての解説だよ。"
+            },
+
+            // Q13 前振り 1 (21-1.PNG)
+            {
+                id: 71,
+                chapter: "第五章",
+                title: "Q13 前振り 1/3",
+                pose: "normal",
+                notice: "5. 私たち兄弟が行った仕事とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-xl sm:text-2xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            5. 私たち兄弟が行った仕事とは？
+                        </h3>
+                    </div>
+                `,
+                speechText: "私と重辰公は、キリスト教を止めさせ仏教により人々に安らぎを与えようとして、神社や寺院を創建・再建しました。"
+            },
+
+            // Q13 前振り 2 (21-2.PNG)
+            {
+                id: 72,
+                chapter: "第五章",
+                title: "Q13 前振り 2/3",
+                pose: "pointing",
+                notice: "5. 私たち兄弟が行った仕事とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-xl sm:text-2xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            5. 私たち兄弟が行った仕事とは？
+                        </h3>
+                    </div>
+                `,
+                speechText: "特に、その中心となるのが、禅宗の東向寺（本渡市本町）、国照寺（苓北町）、浄土宗の円性寺（栖本町）、崇円寺（河浦町）です。"
+            },
+
+            // Q13 前振り 3 (21-3.PNG)
+            {
+                id: 73,
+                chapter: "第五章",
+                title: "Q13 前振り 3/3",
+                pose: "normal",
+                notice: "5. 私たち兄弟が行った仕事とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-xl sm:text-2xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            5. 私たち兄弟が行った仕事とは？
+                        </h3>
+                    </div>
+                `,
+                speechText: "では、問題です。"
+            },
+
+            // Q13 出題画面 (21-4.PNG)
+            {
+                id: 74,
+                chapter: "第五章",
+                title: "クイズ Q13",
+                pose: "book",
+                notice: "Q13. クイズ挑戦",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4 space-y-2">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk">5. 私たち兄弟が行った仕事とは？</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2 leading-snug">
+                            Q13. ニュースこれらの寺は○○と呼ばれています。○○に入る言葉は、次のどれでしょう？
+                        </h3>
+                        <div class="space-y-1.5 max-w-xs pl-4">
+                            <button onclick="selectAnswer(true)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ① 天草四ヵ本寺
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ② 天領天草本寺
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ③ 天草菩提本寺
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "わかるかな？上のせんたくしから、ひとつえらんでクリックしてね。"
+            },
+
+            // Q13 判定画面 (21-5-2.PNG)
+            {
+                id: 75,
+                chapter: "第五章",
+                title: "Q13 判定",
+                pose: "pointing",
+                notice: "Q13 判定",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk mb-1">5. 私たち兄弟が行った仕事とは？</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2">
+                            Q13. これらの寺は○○と呼ばれています。○○に入る言葉は、次のどれでしょう？
+                        </h3>
+                        <div id="q13-result-mark" class="text-5xl sm:text-6xl font-bold my-1"></div>
+                        <div id="q13-result-text" class="text-lg sm:text-xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は1番の「天草四ヵ本寺」でした。"
+            },
+
+            // Q14 出題画面 (22-1.PNG)
+            {
+                id: 76,
+                chapter: "第五章",
+                title: "クイズ Q14",
+                pose: "book",
+                notice: "Q14. クイズ挑戦",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4 space-y-2">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk">5. 私たち兄弟が行った仕事とは？</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2 leading-snug">
+                            Q14. 私と重辰公は、天草に悪い病気が流行し多くの人が亡くなるのを防ぐため数々のことを実施しましたが、実際に実施していないのは次のどれでしょう？
+                        </h3>
+                        <div class="space-y-1.5 max-w-xs pl-4">
+                            <button onclick="selectAnswer(true)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ① 各村に病人を運ぶ救急籠を置いた。
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ② 医師を島内に配置した。また、優秀な子供を大阪に派遣して医術を学ばせた。
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ③ 各寺に薬草に関する本を配布した。
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "わかるかな？上のせんたくしから、ひとつえらんでクリックしてね。"
+            },
+
+            // Q14 判定画面 (22-2-1.PNG)
+            {
+                id: 77,
+                chapter: "第五章",
+                title: "Q14 判定",
+                pose: "pointing",
+                notice: "Q14 判定",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk mb-1">5. 私たち兄弟が行った仕事とは？</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2">
+                            Q14. 私と重辰公は、天草に悪い病気が流行し多くの人が亡くなるのを防ぐため数々のことを実施しましたが、実際に実施していないのは次のどれでしょう？
+                        </h3>
+                        <div id="q14-result-mark" class="text-5xl sm:text-6xl font-bold my-1"></div>
+                        <div id="q14-result-text" class="text-lg sm:text-xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は1番の「各村に病人を運ぶ救急籠を置いた」でした。"
+            },
+
+            // Q15 前振り 1 (23-1.PNG)
+            {
+                id: 78,
+                chapter: "第五章",
+                title: "Q15 前振り 1/4",
+                pose: "normal",
+                notice: "5. 私たち兄弟が行った仕事とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-xl sm:text-2xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            5. 私たち兄弟が行った仕事とは？
+                        </h3>
+                    </div>
+                `,
+                speechText: "しかし、天草の復興（ふっこう）で一番やっかいだったのが、年貢（ねんぐ）を取り立てるもとになる田畑のしゅうかくりょうである石高（こくだか）の問題でした。"
+            },
+
+            // Q15 前振り 2 (23-2.PNG)
+            {
+                id: 79,
+                chapter: "第五章",
+                title: "Q15 前振り 2/4",
+                pose: "open_hands",
+                notice: "5. 私たち兄弟が行った仕事とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-xl sm:text-2xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            5. 私たち兄弟が行った仕事とは？
+                        </h3>
+                    </div>
+                `,
+                speechText: "それまでの計算にむりがあると見て、調査の結果、やはり2万石くらいでした。"
+            },
+
+            // Q15 前振り 3 (23-3.PNG)
+            {
+                id: 80,
+                chapter: "第五章",
+                title: "Q15 前振り 3/4",
+                pose: "pointing",
+                notice: "5. 私たち兄弟が行った仕事とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-xl sm:text-2xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            5. 私たち兄弟が行った仕事とは？
+                        </h3>
+                    </div>
+                `,
+                speechText: "農民の生活をかんがえると、この石高を下げるように幕府にうったえるしかありません。"
+            },
+
+            // Q15 前振り 4 (23-4.PNG)
+            {
+                id: 81,
+                chapter: "第五章",
+                title: "Q15 前振り 4/4",
+                pose: "normal",
+                notice: "5. 私たち兄弟が行った仕事とは？",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4">
+                        <h3 class="text-xl sm:text-2xl chalk-yellow font-chalk border-b border-emerald-600 pb-3 mb-4">
+                            5. 私たち兄弟が行った仕事とは？
+                        </h3>
+                    </div>
+                `,
+                speechText: "では、問題です。"
+            },
+
+            // Q15 出題画面 (23-5.PNG)
+            {
+                id: 82,
+                chapter: "第五章",
+                title: "クイズ Q15",
+                pose: "book",
+                notice: "Q15. クイズ挑戦",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4 space-y-2">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk">5. 私たち兄弟が行った仕事とは？</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2 leading-snug">
+                            Q15. 私が自分の身を投げ出してまでうったえたのは、何でしょう？
+                        </h3>
+                        <div class="space-y-1.5 max-w-xs pl-4">
+                            <button onclick="selectAnswer(true)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ① 「石高半減（こくだかはんげん）」のねがい
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ② 「天草独立（あまくさどくりつ）」のねがい
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm transition">
+                                ③ 「侍（さむらい）をやめる」ねがい
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "わかるかな？上のせんたくしから、ひとつえらんでクリックしてね。"
+            },
+
+            // Q15 判定画面 (23-6-1.PNG)
+            {
+                id: 83,
+                chapter: "第五章",
+                title: "Q15 判定",
+                pose: "pointing",
+                notice: "Q15 判定",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk mb-1">5. 私たち兄弟が行った仕事とは？</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2">
+                            Q15. 私が自分の身を投げ出してまでうったえたのは、何でしょう？
+                        </h3>
+                        <div id="q15-result-mark" class="text-5xl sm:text-6xl font-bold my-1"></div>
+                        <div id="q15-result-text" class="text-lg sm:text-xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は1番の「石高半減（こくだかはんげん）のねがい」でした。"
+            },
+
+            // Q14・Q15 くわしい説明 (解説テキスト) (24-2.jpg)
+            {
+                id: 84,
+                chapter: "第五章",
+                title: "解説：医療と石高半減",
+                pose: "normal",
+                notice: "解説",
+                blackboardHTML: `
+                    <div class="w-full text-left my-auto px-4 space-y-3">
+                        <h3 class="text-lg sm:text-xl chalk-yellow font-chalk border-b border-emerald-600 pb-2">
+                            5. 私たち兄弟が行った仕事とは？【解説】
+                        </h3>
+                        <p class="text-xs sm:text-sm chalk-text font-chalk leading-relaxed">
+                            また、天草には医者がいなかったことから、風邪をひいても百姓たちは薬を飲むこともできなかったので、門徒坊主や庄屋の末っ子などに<span class="text-red-300 font-bold">医術</span>を習わせました。そして、その中でも特に器用な人を大阪へ派遣し、医術を学ばせ、天草の島民を救うため努力したのです。
+                        </p>
+                        <p class="text-xs sm:text-sm chalk-text font-chalk leading-relaxed">
+                            さらに、鈴木重成公は、天草をおさめる幕府に対して、「<span class="text-red-300 font-bold">石高半減（こくだかはんげん）</span>」のうったえを何度か行いました。しかし、重成公の願いは聞き入れられませんでした。そして、重成公がなくなって6年後、むすこの<span class="text-red-300 font-bold">重辰公</span>が2代目代官として天草をおさめている時に、その願いは聞き入れられ、石高半減が実現したのです。
+                        </p>
+                    </div>
+                `,
+                speechText: "天草の島民を救うための医療の充実と、石高半減の実現にはこのような努力と歴史があったのですね。"
+            },
+
+            // 関連資料写真：お寺（崇円寺・東向寺・国照寺） (24-2.jpg 下部写真)
+            {
+                id: 85,
+                chapter: "第五章",
+                title: "資料：天草ゆかりのお寺",
+                pose: "pointing",
+                notice: "関連資料",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-center px-2 py-1">
+                        <h3 class="text-sm sm:text-base chalk-yellow font-chalk mb-3">
+                            天草ゆかりのお寺（崇円寺・東向寺・国照寺）
+                        </h3>
+                        <div class="grid grid-cols-3 gap-2 w-full max-w-lg">
+                            <div class="flex flex-col items-center bg-black/20 p-1 rounded border border-white/10">
+                                <img src="images/24-2-1.jpg" alt="崇円寺" class="w-full h-24 sm:h-32 object-cover rounded shadow mb-1">
+                                <span class="text-xs font-chalk chalk-text">▲ 崇円寺</span>
+                            </div>
+                            <div class="flex flex-col items-center bg-black/20 p-1 rounded border border-white/10">
+                                <img src="images/24-2-2.jpg" alt="東向寺" class="w-full h-24 sm:h-32 object-cover rounded shadow mb-1">
+                                <span class="text-xs font-chalk chalk-text">▲ 東向寺</span>
+                            </div>
+                            <div class="flex flex-col items-center bg-black/20 p-1 rounded border border-white/10">
+                                <img src="images/24-2-3.jpg" alt="国照寺" class="w-full h-24 sm:h-32 object-cover rounded shadow mb-1">
+                                <span class="text-xs font-chalk chalk-text">▲ 国照寺</span>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                speechText: "こちらが鈴木重成公・重辰公ゆかりのお寺である崇円寺、東向寺、国照寺の写真です。"
+            },
+
+            // 第六章 タイトル (25-1.jpg)
+            {
+                id: 86,
+                chapter: "第六章",
+                title: "第六章 鈴木神社にまつわる話",
+                pose: "normal",
+                notice: "章タイトル",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-center px-4 py-2 text-center">
+                        <span class="text-xs sm:text-sm chalk-orange font-chalk mb-2">【第六章】</span>
+                        <h2 class="text-xl sm:text-2xl font-bold chalk-yellow font-chalk mb-4">
+                            鈴木神社にまつわる話
+                        </h2>
+                        <p class="text-sm sm:text-base chalk-text font-chalk leading-relaxed">
+                            天草の人々に親しまれている<br>鈴木神社と「鈴木精神」について学ぼう！
+                        </p>
+                    </div>
+                `,
+                speechText: "第六章は「鈴木神社にまつわる話」です。"
+            },
+
+            // 6. 鈴木神社にまつわる話 解説 (25-2.jpg)
+            {
+                id: 87,
+                chapter: "第六章",
+                title: "6. 鈴木神社にまつわる話",
+                pose: "explaining",
+                notice: "解説",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-start px-4 py-2">
+                        <h3 class="text-base sm:text-lg chalk-yellow font-chalk mb-3">
+                            6. 鈴木神社にまつわる話
+                        </h3>
+                        <p class="text-sm sm:text-base chalk-text font-chalk leading-relaxed">
+                            鈴木神社は、鈴木重成公が江戸で亡くなった際、その<span class="chalk-orange">遺髪（いはつ）</span>を現在の本渡市本町の丘に埋めて供養したことからはじまりました。
+                        </p>
+                    </div>
+                `,
+                speechText: "鈴木神社は、重成公が江戸で亡くなった時に、その遺髪を今の本渡市本町の丘に埋めて供養したことからはじまりました。"
+            },
+
+            // Q16 問題
+            {
+                id: 88,
+                chapter: "第六章",
+                title: "Q16 問題",
+                type: "quiz",
+                questionId: "Q16",
+                pose: "pointing",
+                notice: "問題",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <h3 class="text-base sm:text-lg chalk-yellow font-chalk mb-4">
+                            Q16. 鈴木神社にまつってあるのは、だれの遺髪でしょう？
+                        </h3>
+                        <div class="grid grid-cols-1 gap-2 max-w-xs mx-auto">
+                            <button onclick="selectAnswer(false)" class="p-2.5 bg-white/10 hover:bg-white/20 rounded border border-white/20 text-left text-sm chalk-text font-chalk transition">
+                                ① 正三和尚
+                            </button>
+                            <button onclick="selectAnswer(true)" class="p-2.5 bg-white/10 hover:bg-white/20 rounded border border-white/20 text-left text-sm chalk-text font-chalk transition">
+                                ② 重成公
+                            </button>
+                            <button onclick="selectAnswer(false)" class="p-2.5 bg-white/10 hover:bg-white/20 rounded border border-white/20 text-left text-sm chalk-text font-chalk transition">
+                                ③ 重辰公
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "鈴木神社にまつってあるのは、だれの遺髪でしょう？正しいと思う番号を選んでね。"
+            },
+
+            // Q16 判定・解説画面
+            {
+                id: 89,
+                chapter: "第六章",
+                title: "Q16 判定",
+                notice: "Q16 判定",
+                pose: "book",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk mb-1">6. 鈴木神社と人々の思い</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2">
+                            Q16. 鈴木神社には、重成公の何が祀（まつ）られているでしょう？
+                        </h3>
+                        <div id="q16-result-mark" class="text-5xl sm:text-6xl font-bold my-1"></div>
+                        <div id="q16-result-text" class="text-lg sm:text-xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は②の重成公です！"
+            },
+
+            // Q17 問題
+            {
+                id: 90,
+                chapter: "第六章",
+                title: "Q17 問題",
+                type: "quiz",
+                questionId: "Q17",
+                pose: "pointing",
+                notice: "問題",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-between px-2 py-1">
+                        <div class="mb-2">
+                            <span class="text-xs chalk-orange font-chalk">Q17</span>
+                            <h3 class="text-sm sm:text-base chalk-yellow font-chalk">
+                                「おのれを投げうって世のため人のためにつくす」という精神を天草の人たちは何と言っているでしょう？
+                            </h3>
+                        </div>
+                        <div class="grid grid-cols-1 gap-1.5 my-auto">
+                            <button onclick="selectAnswer(false)" class="p-2 bg-white/10 hover:bg-white/20 rounded border border-white/20 text-left text-xs sm:text-sm chalk-text font-chalk transition">
+                                ① 奉仕精神（ほうしせいしん）
+                            </button>
+                            <button onclick="selectAnswer(true)" class="p-2 bg-white/10 hover:bg-white/20 rounded border border-white/20 text-left text-xs sm:text-sm chalk-text font-chalk transition">
+                                ② 鈴木精神（すずきせいしん）
+                            </button>
+                            <button onclick="selectAnswer(false)" class="p-2 bg-white/10 hover:bg-white/20 rounded border border-white/20 text-left text-xs sm:text-sm chalk-text font-chalk transition">
+                                ③ 天草精神（あまくさせいしん）
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "「おのれを投げうって世のため人のためにつくす」精神を何と言っているでしょう？"
+            },
+
+            // Q17 判定・正解解説
+            {
+                id: 91,
+                chapter: "第六章",
+                title: "Q17 判定",
+                notice: "Q17 判定",
+                pose: "book",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk mb-1">6. 鈴木神社と人々の思い</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2">
+                            Q17. 「おのれを投げうって世のため人のためにつくす」という精神を天草の人たちは何と言っているでしょう？
+                        </h3>
+                        <div id="q17-result-mark" class="text-5xl sm:text-6xl font-bold my-1"></div>
+                        <div id="q17-result-text" class="text-lg sm:text-xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は②の鈴木精神（すずきせいしん）です！"
+            },
+
+            // Q18 問題
+            {
+                id: 92,
+                chapter: "第六章",
+                title: "Q18 問題",
+                type: "quiz",
+                questionId: "Q18",
+                pose: "pointing",
+                notice: "問題",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-between px-2 py-1">
+                        <div class="mb-2">
+                            <span class="text-xs chalk-orange font-chalk">Q18</span>
+                            <h3 class="text-xs sm:text-sm chalk-yellow font-chalk leading-snug">
+                                天草には鈴木三公を祀る石の祠や石像が島内各地にあります。現在確認されている数は次のどれでしょう。
+                            </h3>
+                        </div>
+                        <div class="grid grid-cols-1 gap-1.5 my-auto">
+                            <button onclick="selectAnswer(false)" class="p-2 bg-white/10 hover:bg-white/20 rounded border border-white/20 text-left text-xs sm:text-sm chalk-text font-chalk transition">
+                                ① 11箇所
+                            </button>
+                            <button onclick="selectAnswer(false)" class="p-2 bg-white/10 hover:bg-white/20 rounded border border-white/20 text-left text-xs sm:text-sm chalk-text font-chalk transition">
+                                ② 22箇所
+                            </button>
+                            <button onclick="selectAnswer(true)" class="p-2 bg-white/10 hover:bg-white/20 rounded border border-white/20 text-left text-xs sm:text-sm chalk-text font-chalk transition">
+                                ③ 33箇所
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "天草島内にある鈴木三公を祀る石の祠や石像の数は、現在確認されているだけでいくつあるでしょう？"
+            },
+
+            // Q18 判定・正解解説
+            {
+                id: 93,
+                chapter: "第六章",
+                title: "Q18 判定",
+                notice: "Q18 判定",
+                pose: "book",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk mb-1">6. 鈴木神社と人々の思い</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2">
+                            Q18. 天草島内にある石の祠や石像は現在何箇所確認されているでしょう？
+                        </h3>
+                        <div id="q18-result-mark" class="text-5xl sm:text-6xl font-bold my-1"></div>
+                        <div id="q18-result-text" class="text-lg sm:text-xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は③の33箇所です！"
+            },
+
+            // 関連資料写真：鈴木神社の画像 (27-2-1.jpg 下部写真)
+            {
+                id: 94,
+                chapter: "第六章",
+                title: "資料：鈴木神社・祠",
+                pose: "pointing",
+                notice: "関連資料",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-center px-2 py-1">
+                        <h3 class="text-sm sm:text-base chalk-yellow font-chalk mb-2">
+                            鈴木神社と各地の祠・石像
+                        </h3>
+                        <div class="grid grid-cols-3 gap-2 sm:gap-3 w-full max-w-2xl mx-auto">
+                            <div class="flex flex-col items-center bg-black/20 p-1 rounded border border-white/10">
+                                <img src="images/28-1-1.jpg" alt="鈴木神社" class="w-full h-20 sm:h-28 object-cover rounded shadow mb-1">
+                                <span class="text-[10px] sm:text-xs font-chalk chalk-text text-center">▲ 鈴木神社（本渡市本町）</span>
+                            </div>
+                            <div class="flex flex-col items-center bg-black/20 p-1 rounded border border-white/10">
+                                <img src="images/28-1-2.jpg" alt="鈴木三公のほこら" class="w-full h-20 sm:h-28 object-cover rounded shadow mb-1">
+                                <span class="text-[10px] sm:text-xs font-chalk chalk-text text-center">▲ 島内各地の祠・石像（33箇所）</span>
+                            </div>
+                            <div class="flex flex-col items-center bg-black/20 p-1 rounded border border-white/10">
+                                <img src="images/28-1-3.jpg" alt="鈴木の精神" class="w-full h-20 sm:h-28 object-cover rounded shadow mb-1">
+                                <span class="text-[10px] sm:text-xs font-chalk chalk-text text-center">▲ 本町小学校</span>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                speechText: "こちらが本渡市本町にある鈴木神社や、島内各地に建てられた祠の写真です。"
+            },
+
+            // Q18 詳しい説明（解説テキスト）(28-1.jpg)
+            {
+                id: 95,
+                chapter: "第六章",
+                title: "解説：鈴木精神と鈴木三神",
+                pose: "pointing",
+                notice: "解説",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-start px-3 py-1">
+                        <h3 class="text-sm sm:text-base chalk-yellow font-chalk mb-2">
+                            6. 鈴木神社にまつわる話【解説】
+                        </h3>
+                        <p class="text-xs sm:text-sm chalk-text font-chalk leading-relaxed mb-2">
+                            天領・天草の初代代官として天草を復興し、農民のために自ら犠牲となって「<span class="chalk-orange">石高半減</span>」を訴えられた鈴木重成公の生涯は、「<span class="chalk-yellow">おのれを投げうって世のため人のためにつくす</span>」という<span class="chalk-orange">鈴木精神</span>そのものです。
+                        </p>
+                        <p class="text-xs sm:text-sm chalk-text font-chalk leading-relaxed">
+                            鈴木神社では、正三公・重辰公をあわせて「<span class="chalk-yellow">鈴木三神（すずきさんしん）</span>」として祀り、毎年10月に記念大祭を行っています。また、島内33箇所に「鈴木さま」と呼ばれる祠や塚が祀られています。
+                        </p>
+                    </div>
+                `,
+                speechText: "初代代官として天草を復興させた鈴木重成公の生涯は、まさに「鈴木精神」そのものです。鈴木神社では鈴木三神として祀られ、毎年10月に記念大祭が行われています。"
+            },
+
+            
+
+            // 第七章 タイトルスライド (29-1.PNG)
+            {
+                id: 96,
+                chapter: "第七章",
+                title: "第七章：今の天草から未来へ",
+                type: "chapter_title",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-center text-center">
+                        <h2 class="text-2xl sm:text-3xl font-bold text-white font-chalk mb-4">第七章</h2>
+                        <p class="text-3xl sm:text-4xl font-bold font-chalk text-white">
+                            今の天草から<span class="chalk-orange">未来</span>へ
+                        </p>
+                    </div>
+                `,
+                speechText: "第七章、今の天草から未来へ。"
+            },
+
+            // 7. 今の天草から未来へ 導入1 (29-2.PNG)
+            {
+                id: 97,
+                chapter: "第七章",
+                title: "7. 今の天草から未来へ",
+                pose: "explaining",
+                notice: "解説",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-start px-4">
+                        <h3 class="text-lg sm:text-xl chalk-yellow font-chalk mb-4">7. 今の天草から未来へ</h3>
+                    </div>
+                `,
+                speechText: "鈴木三公によって復興された天草は、その後、農業や漁業を中心として発展してきました。"
+            },
+
+            // 7. 今の天草から未来へ 導入2 (29-3.PNG)
+            {
+                id: 98,
+                chapter: "第七章",
+                title: "7. 今の天草から未来へ",
+                pose: "pointing",
+                notice: "解説",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-start px-4">
+                        <h3 class="text-lg sm:text-xl chalk-yellow font-chalk mb-4">7. 今の天草から未来へ</h3>
+                    </div>
+                `,
+                speechText: "また、天草にはすばらしいところがたくさんあり、すばらしいひとがたくさんいます。"
+            },
+
+            // 7. 今の天草から未来へ 導入3 (29-4.PNG)
+            {
+                id: 99,
+                chapter: "第七章",
+                title: "7. 今の天草から未来へ",
+                pose: "welcome",
+                notice: "解説",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-start px-4">
+                        <h3 class="text-lg sm:text-xl chalk-yellow font-chalk mb-4">7. 今の天草から未来へ</h3>
+                    </div>
+                `,
+                speechText: "そんな天草の良いところをみんなに紹介しましょう！"
+            },
+
+            // Q19 出題前アナウンス (29-5.PNG)
+            {
+                id: 100,
+                chapter: "第七章",
+                title: "問題です",
+                pose: "reading",
+                notice: "問題",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-start px-4">
+                        <h3 class="text-lg sm:text-xl chalk-yellow font-chalk mb-4">7. 今の天草から未来へ</h3>
+                    </div>
+                `,
+                speechText: "問題です。黒板に表示されるよ。"
+            },
+
+            // Q19 クイズ問題
+            {
+                id: 101,
+                chapter: "第七章",
+                title: "Q19. 天草のかんきつ類",
+                type: "quiz",
+                questionId: "Q19",
+                pose: "pointing",
+                notice: "問題",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-between px-2 py-1">
+                        <div class="mb-2">
+                            <p class="text-xs sm:text-sm chalk-text font-chalk mb-1">7. 今の天草から未来へ</p>
+                            <h3 class="text-xs sm:text-base chalk-yellow font-chalk leading-relaxed">
+                                Q19. 天草の温暖な気候条件を活用して「かんきつ類」の栽培が盛んに行われていますが、ポンカンやデコポンと並んで天草の代表的な「かんきつ類」は、次のどれでしょう？
+                            </h3>
+                        </div>
+                        <div class="grid grid-cols-1 gap-1.5 my-auto">
+                            <button onclick="selectAnswer(false)" class="w-full text-left p-2 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm border border-white/20 transition-all flex items-center">
+                                <span class="chalk-orange mr-2">①</span> 晩白柚（ばんぺいゆ）
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left p-2 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm border border-white/20 transition-all flex items-center">
+                                <span class="chalk-orange mr-2">②</span> きんかん
+                            </button>
+                            <button onclick="selectAnswer(true)" class="w-full text-left p-2 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm border border-white/20 transition-all flex items-center">
+                                <span class="chalk-orange mr-2">③</span> 河内晩柑（かわちばんかん）
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "わかるかな？上の選択肢から、ひとつ選んでクリックしてね。"
+            },
+
+            // Q19 結果・解説
+            {
+                id: 102,
+                chapter: "第七章",
+                title: "Q19 解答解説",
+                notice: "Q19 判定",
+                pose: "explaining",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk mb-1">7. 今の天草から未来へ</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2">
+                            Q19. 天草の温暖な気候条件を活用して「かんきつ類」の栽培が盛んに行われていますが、ポンカンやデコポンと並んで天草の代表的な「かんきつ類」は、次のどれでしょう？
+                        </h3>
+                        <div id="q19-result-mark" class="text-5xl sm:text-6xl font-bold my-1"></div>
+                        <div id="q19-result-text" class="text-lg sm:text-xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は3番の「河内晩柑（かわちばんかん）」でした。"
+            },
+
+            // Q20 クイズ問題
+            {
+                id: 103,
+                chapter: "第七章",
+                title: "Q20. 天草の橋",
+                type: "quiz",
+                questionId: "Q20",
+                pose: "reading",
+                notice: "問題",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-between items-center px-4 py-2 text-center">
+                        <div>
+                            <p class="text-xs sm:text-sm chalk-text font-chalk mb-1">7. 今の天草から未来へ</p>
+                            <h3 class="text-xs sm:text-base chalk-yellow font-chalk leading-relaxed">
+                                Q20. 今、天草にはいろんな交通手段で行くことができます。天草に車で行けるようにするため、島々を橋につなぎました。この橋を何というでしょう？
+                            </h3>
+                        </div>
+                        <div class="w-full space-y-2 my-auto">
+                            <button onclick="selectAnswer(true)" class="w-full text-left p-2 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm border border-white/20 transition-all flex items-center">
+                                <span class="chalk-orange mr-2">①</span> 天草五橋（あまくさごきょう）
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left p-2 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm border border-white/20 transition-all flex items-center">
+                                <span class="chalk-orange mr-2">②</span> 関門海峡大橋（かんもんかいきょうおおはし）
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left p-2 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm border border-white/20 transition-all flex items-center">
+                                <span class="chalk-orange mr-2">③</span> 牛深大橋（うしぶかおおはし）
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "わかるかな？上の選択肢から、ひとつ選んでクリックしてね。"
+            },
+
+            // Q20 結果・解説
+            {
+                id: 104,
+                chapter: "第七章",
+                title: "Q20 解答解説",
+                notice: "Q20 判定",
+                pose: "explaining",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk mb-1">7. 今の天草から未来へ</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2">
+                            Q20. 今、天草にはいろんな交通手段で行くことができます。天草に車で行けるようにするため、島々を橋につなぎました。この橋を何というでしょう？
+                        </h3>
+                        <div id="q20-result-mark" class="text-5xl sm:text-6xl font-bold my-1"></div>
+                        <div id="q20-result-text" class="text-lg sm:text-xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は1番の「天草五橋（あまくさごきょう）」でした。クリックで次の問題だよ。"
+            },
+
+            // Q19・Q20 詳しい説明（解説テキスト前半：産業・農業） (32-1.PNG)
+            {
+                id: 105,
+                chapter: "第七章",
+                title: "解説：天草の農業・かんきつ類",
+                pose: "pointing",
+                notice: "解説",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-start px-3 py-1">
+                        <h3 class="text-sm sm:text-base chalk-yellow font-chalk mb-2">
+                            7. 今の天草から未来へ【解説：農業・産業】
+                        </h3>
+                        <p class="text-xs sm:text-sm chalk-text font-chalk leading-relaxed mb-2">
+                            天草では、温暖な気候条件を活用して色々な「かんきつ類」や「野菜」の栽培が行われています。
+                        </p>
+                        <p class="text-xs sm:text-sm chalk-text font-chalk leading-relaxed">
+                            かんきつ類では<span class="chalk-yellow">ポンカン</span>、<span class="chalk-yellow">デコポン</span>、<span class="chalk-yellow">河内晩柑</span>などが一年を通して出荷されています。また、熊本県内で最大の栽培面積を誇る<span class="chalk-orange">レタス</span>や<span class="chalk-orange">春バレイショ</span>、<span class="chalk-orange">キュウリ</span>は、国の重要な野菜産地として指定を受けています。
+                        </p>
+                    </div>
+                `,
+                speechText: "天草では温暖な気候を生かしてポンカンやデコポン、河内晩柑などの柑橘類や、レタス・キュウリなどの野菜栽培が盛んに行われています。"
+            },
+
+            // Q19・Q20 詳しい説明（解説テキスト後半：交通） (32-1.PNG)
+            {
+                id: 106,
+                chapter: "第七章",
+                title: "解説：天草の交通（天草五橋・交通網）",
+                pose: "explaining",
+                notice: "解説",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-start px-3 py-1">
+                        <h3 class="text-sm sm:text-base chalk-yellow font-chalk mb-2">
+                            7. 今の天草から未来へ【解説：交通網】
+                        </h3>
+                        <p class="text-xs sm:text-sm chalk-text font-chalk leading-relaxed mb-2">
+                            離島だった天草を橋で九州本土と結んだ<span class="chalk-orange">天草五橋</span>は、当時の大矢野町長・森慈秀（もりじしゅう）さんの「海に橋を架け、天草を一つに繋ぐ」という壮大な発想が実現したものです。
+                        </p>
+                        <p class="text-xs sm:text-sm chalk-text font-chalk leading-relaxed">
+                            三角と前島、上島、下島、大矢野島を5つの橋でつなぎました。現在は、<span class="chalk-yellow">天草エアライン</span>の飛行機や<span class="chalk-yellow">高速船マリンビュー</span>をはじめとしたフェリーで熊本、福岡、島原、鹿児島などと結ばれています。
+                        </p>
+                    </div>
+                `,
+                speechText: "離島だった天草を結んだ天草五橋をはじめ、現在は天草エアラインや高速船マリンビューなどで各地と結ばれています。"
+            },
+
+            // 関連資料写真：天草五橋・マリンビュー・天草エアライン (32-1.PNG 下部写真)
+            {
+                id: 107,
+                chapter: "第七章",
+                title: "資料：天草の交通（五橋・高速船・飛行機）",
+                pose: "pointing",
+                notice: "関連資料",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-center px-2 py-1">
+                        <h3 class="text-sm sm:text-base chalk-yellow font-chalk mb-2">
+                            天草の交通（天草五橋・高速船・天草エアライン）
+                        </h3>
+                        <div class="grid grid-cols-3 gap-2 w-full max-w-lg">
+                            <div class="flex flex-col items-center bg-black/20 p-1 rounded border border-white/10">
+                                <img src="images/32-1-1.jpg" alt="天草五橋（5号橋）" class="w-full h-24 sm:h-32 object-cover rounded shadow mb-1">
+                                <span class="text-xs font-chalk chalk-text">▲ 天草五橋（5号橋）</span>
+                            </div>
+                            <div class="flex flex-col items-center bg-black/20 p-1 rounded border border-white/10">
+                                <img src="images/32-1-2.jpg" alt="高速船マリンビュー" class="w-full h-24 sm:h-32 object-cover rounded shadow mb-1">
+                                <span class="text-xs font-chalk chalk-text">▲ 高速船マリンビュー</span>
+                            </div>
+                            <div class="flex flex-col items-center bg-black/20 p-1 rounded border border-white/10">
+                                <img src="images/32-1-3.jpg" alt="天草エアライン" class="w-full h-24 sm:h-32 object-cover rounded shadow mb-1">
+                                <span class="text-xs font-chalk chalk-text">▲ 天草エアライン</span>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                speechText: "こちらが天草五橋の5号橋、高速船マリンビュー、そして天草エアラインの写真です。"
+            },
+
+            // 7. 今の天草から未来へ（陶磁器の紹介1） (31-1.PNG)
+            {
+                id: 108,
+                chapter: "第七章",
+                title: "今の天草から未来へ：陶磁器の島",
+                pose: "normal",
+                notice: "解説",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-center px-4">
+                        <h2 class="text-xl sm:text-2xl chalk-yellow font-chalk text-center">
+                            7. 今の天草から未来へ
+                        </h2>
+                    </div>
+                `,
+                speechText: "天草は陶磁器（とうじき）の島としても知られています。"
+            },
+
+            // 7. 今の天草から未来へ（陶磁器の紹介2・天草陶石） (31-2.PNG)
+            {
+                id: 109,
+                chapter: "第七章",
+                title: "今の天草から未来へ：天草陶石",
+                pose: "pointing",
+                notice: "解説",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-center px-4">
+                        <h2 class="text-xl sm:text-2xl chalk-yellow font-chalk text-center">
+                            7. 今の天草から未来へ
+                        </h2>
+                    </div>
+                `,
+                speechText: "原料となる陶石（とうせき）の産地として質量（しつりょう）ともに日本一で、宇宙船の耐熱材（たいねつざい）の原料にも天草陶石が使われているほどです。"
+            },
+
+            // Q21 導入 (31-3.PNG)
+            {
+                id: 110,
+                chapter: "第七章",
+                title: "Q21 導入",
+                pose: "normal",
+                notice: "問題導入",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-center px-4">
+                        <h2 class="text-xl sm:text-2xl chalk-yellow font-chalk text-center">
+                            7. 今の天草から未来へ
+                        </h2>
+                    </div>
+                `,
+                speechText: "では、問題です。"
+            },
+
+            // Q21 出題 (31-4.PNG)
+            {
+                id: 111,
+                chapter: "第七章",
+                title: "Q21 出題",
+                type: "quiz",
+                questionId: "Q21",
+                pose: "reading",
+                notice: "問題",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-start items-start px-3 py-1">
+                        <span class="text-xs sm:text-sm chalk-text font-chalk mb-1">7. 今の天草から未来へ</span>
+                        <h3 class="text-sm sm:text-base chalk-yellow font-chalk mb-2">
+                            Q21. 月までいったアメリカの宇宙船は何というでしょう？
+                        </h3>
+                        <div class="w-full space-y-1 sm:space-y-2 mt-1">
+                            <button onclick="selectAnswer(false)" class="w-full text-left p-2 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm border border-white/20 transition-all flex items-center">
+                                <span class="chalk-orange mr-2">①</span> スペースシャトル
+                            </button>
+                            <button onclick="selectAnswer(true)" class="w-full text-left p-2 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm border border-white/20 transition-all flex items-center">
+                                <span class="chalk-orange mr-2">②</span> アポロ宇宙船
+                            </button>
+                            <button onclick="selectAnswer(false)" class="w-full text-left p-2 rounded bg-white/10 hover:bg-white/20 text-white font-chalk text-xs sm:text-sm border border-white/20 transition-all flex items-center">
+                                <span class="chalk-orange mr-2">③</span> H2ロケット
+                            </button>
+                        </div>
+                    </div>
+                `,
+                speechText: "これがさいごの問題だよ。上のせんたくしから、ひとつえらんでクリックしてね。"
+            },
+
+            // Q21 判定・解説
+            {
+                id: 112,
+                chapter: "第七章",
+                title: "Q21 解答・結果",
+                notice: "Q21 判定",
+                pose: "explaining",
+                blackboardHTML: `
+                    <div class="w-full text-center my-auto px-4">
+                        <p class="text-xs sm:text-sm chalk-text font-chalk mb-1">7. 今の天草から未来へ</p>
+                        <h3 class="text-xs sm:text-sm chalk-yellow font-chalk mb-2">
+                            Q21. 天草の陶石（とうせき）を使って作られた有名なものはどれでしょう？
+                        </h3>
+                        <div id="q21-result-mark" class="text-5xl sm:text-6xl font-bold my-1"></div>
+                        <div id="q21-result-text" class="text-lg sm:text-xl font-chalk"></div>
+                    </div>
+                `,
+                speechText: "正解は2番の「アポロ宇宙船」でした。"
+            },
+
+            // Q21 詳しい説明（解説テキスト前半：天草陶石・伝統工芸品） (32-2.PNG)
+            {
+                id: 113,
+                chapter: "第七章",
+                title: "解説：天草陶磁器と天草陶石",
+                pose: "pointing",
+                notice: "解説",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-start px-3 py-1">
+                        <h3 class="text-sm sm:text-base chalk-yellow font-chalk mb-2">
+                            9. 今の天草から未来へ【解説：天草陶磁器】
+                        </h3>
+                        <p class="text-xs sm:text-sm chalk-text font-chalk leading-relaxed mb-2">
+                            天草にはたくさんの<span class="chalk-yellow">窯元（かまもと）</span>があり、陶磁器の島としても知られています。
+                        </p>
+                        <p class="text-xs sm:text-sm chalk-text font-chalk leading-relaxed">
+                            原料となる陶石の産地として質量とも日本一を誇り、有田焼をはじめとする多くの磁器製造には欠かせないものです。宇宙船の耐熱材の原料としても使われるほどで、<span class="chalk-orange">天草陶磁器</span>は平成15年に国の伝統工芸品に指定されました。
+                        </p>
+                    </div>
+                `,
+                speechText: "天草にはたくさんの窯元があり、原料の陶石は質量ともに日本一です。天草陶磁器は平成15年に国の伝統工芸品に指定されました。"
+            },
+
+            // Q21 詳しい説明（解説テキスト後半：メッセージ） (32-2.PNG)
+            {
+                id: 114,
+                chapter: "第七章",
+                title: "解説：天草の自然と人々",
+                pose: "normal",
+                notice: "解説",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-center px-4">
+                        <h3 class="text-base sm:text-lg chalk-yellow font-chalk text-center mb-3">
+                            天草の自然と人々の精神をいつまでも
+                        </h3>
+                        <p class="text-sm sm:text-base chalk-text font-chalk text-center leading-relaxed">
+                            天草の豊かな自然と、そこに暮らす人々の精神を<br>いつまでも残していきたいものですね。
+                        </p>
+                    </div>
+                `,
+                speechText: "天草の自然と人々の精神をいつまでも残していきたいものですね。"
+            },
+
+            // 関連資料写真：天草陶磁器・天草の人々・天草の風景 (32-2.PNG 下部写真)
+            {
+            id: 115,
+            chapter: "第七章",
+            title: "資料：天草陶磁器・人々・風景",
+            pose: "pointing",
+            notice: "関連資料",
+            blackboardHTML: `
+               <div class="w-full h-full flex flex-col justify-center items-center px-4 py-2">
+                    <h3 class="text-base sm:text-lg chalk-yellow font-chalk mb-3 text-center">
+                        天草の文化と風景
+                    </h3>
+                    <div class="grid grid-cols-2 gap-4 w-full max-w-md mx-auto">
+                        <div class="flex flex-col items-center bg-black/20 p-1.5 rounded border border-white/10">
+                            <img src="images/32-2-1.jpg" alt="天草陶磁器（とうじき）" class="w-full h-32 sm:h-40 object-cover rounded shadow mb-1.5">
+                            <span class="text-xs sm:text-sm font-chalk chalk-text text-center">▲ 天草陶磁器</span>
+                        </div>
+                        <div class="flex flex-col items-center bg-black/20 p-1.5 rounded border border-white/10">
+                            <img src="images/32-2-2.jpg" alt="天草の人々" class="w-full h-32 sm:h-40 object-cover rounded shadow mb-1.5">
+                            <span class="text-xs sm:text-sm font-chalk chalk-text text-center">▲ 天草の人々</span>
+                        </div>
+                    </div>
+                </div>
+            `,
+            speechText: "こちらが天草陶磁器、そして天草の風景写真です。"
+        },
+
+            // クイズ終了の案内 (33-1.PNG)
+            {
+                id: 116,
+                chapter: "第七章",
+                title: "クイズ終了",
+                pose: "pointing",
+                notice: "エンディング",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-center px-4">
+                        <h2 class="text-xl sm:text-2xl chalk-yellow font-chalk text-center">
+                            クイズ終了！
+                        </h2>
+                    </div>
+                `,
+                speechText: "さあ、これでクイズは終了だよ。君のせいせきは…"
+            },
+
+            // 結果発表・正解数表示 (33-2.PNG)
+            // ※ 正解数（score）や全問題数（totalQuestions）はJavaScript側で動的に描画・表示制御できるようにクラス名等を配置しています
+            {
+                id: 117,
+                chapter: "第七章",
+                title: "結果発表",
+                pose: "normal",
+                notice: "結果発表",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-end pr-8 sm:pr-16">
+                        <div class="text-right font-chalk">
+                            <span id="correct-count" class="text-4xl sm:text-6xl text-white font-bold mr-2">2</span>
+                            <span class="text-lg sm:text-2xl chalk-text">問、正解！</span>
+                        </div>
+                    </div>
+                `,
+                // 成績に応じたメッセージ分岐例（JSで付け替える場合はデフォルトテキストとして設定）
+                speechText: "次はもうすこしがんばろう！",
+                isFinalSlide: true // 最後のスライド判定用フラグ
+            },
+
+            // クレジット・関係者 (119)
+            {
+                id: 118,
+                chapter: "第七章",
+                title: "クレジット",
+                pose: "normal",
+                notice: "おわりに",
+                blackboardHTML: `
+                    <div class="w-full h-full flex flex-col justify-center items-center px-4 text-center font-chalk">
+                        <h2 class="text-base sm:text-lg chalk-yellow font-bold mb-3">
+                            鈴木重成公没後350年記念事業実行委員会
+                        </h2>
+                        <div class="text-xs sm:text-sm text-white space-y-2 leading-relaxed">
+                            <p><span class="chalk-yellow">制作</span> RKK熊本放送</p>
+                            <p><span class="chalk-yellow">企画</span> マックスファイブ</p>
+                            <div class="mt-1">
+                                <p class="chalk-yellow">協力</p>
+                                <p>OA通信サービス</p>
+                                <p>アイエムエス・ドット・ジェーピー</p>
+                                <p>ジェイムーブ</p>
+                                <p>苓北町教育委員会</p>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                speechText: "最後まで見てくれてありがとう！これで「鈴木神社にまつわる話」はおしまいだよ。"
+            },
+        ];
+
+        
+        // --- 1. 変数制御と状態管理 ---
+        let currentIndex = 0;
+        let score = 0;
+        let hasAnswered = false;
+        lastSelectedCorrect = false;
+        const totalQuestions = 21;
+
+        // 選択肢をクリックしたとき
+        function selectAnswer(isCorrect) {
+            hasAnswered = true;
+            // 確実に boolean 値に変換
+            lastSelectedCorrect = (isCorrect === true || isCorrect === 'true');
+            
+            if (lastSelectedCorrect) {
+                score++;
+            }
+
+            if (currentIndex < slidesData.length - 1) {
+                currentIndex++;
+                renderSlide(currentIndex);
+            }
+        }
+
+        function checkAnswer(selected, correct, nextSlideId) {
+            // 1. スライドを移動する処理（既存の処理）
+            goToSlide(nextSlideId);
+
+            // 少しだけ遅延させて描画後のDOMを取得・書き換え
+            setTimeout(() => {
+                // 対象の表示領域を取得（Q20の場合）
+                const markEl = document.getElementById(`q${currentQuestionNo}-result-mark`);
+                const textEl = document.getElementById(`q${currentQuestionNo}-result-text`);
+
+                if (markEl && textEl) {
+                    // 一度中身を空にしてから〇✕を入れる
+                    markEl.innerHTML = "";
+                    textEl.innerHTML = "";
+
+                    if (selected === correct) {
+                        markEl.innerHTML = `<div class="text-5xl font-bold text-red-500 mb-2">〇</div>`;
+                        textEl.innerHTML = `<div class="text-xl font-chalk text-red-400">せいかい！</div>`;
+                    } else {
+                        markEl.innerHTML = `<div class="text-5xl font-bold text-blue-500 mb-2">✕</div>`;
+                        textEl.innerHTML = `<div class="text-xl font-chalk text-blue-400">ざんねん！</div>`;
+                    }
+                }
+            }, 50);
+        }
+
+        function handleAnswer(isCorrect) {
+            selectAnswer(isCorrect);
+        }
+
+        // 「次へ進む」ボタンを押したとき
+        function nextSlide() {
+            if (currentIndex < slidesData.length - 1) {
+                // ボタンを押さずに「次へ進む」で移動した場合は不正解扱いにリセット
+                lastSelectedCorrect = false;
+
+                currentIndex++;
+                renderSlide(currentIndex);
+            } else {
+                // 最初に戻る時
+                currentIndex = 0;
+                score = 0;
+                hasAnswered = false;
+                lastSelectedCorrect = false;
+                renderSlide(currentIndex);
+            }
+        }
+
+        function prevSlide() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderSlide(currentIndex);
+            }
+        }
+
+        // --- 4. メイン描画処理（元のHTMLのID構造をそのまま使用） ---
+        function renderSlide(index) {
+            if (typeof slidesData === 'undefined' || !slidesData[index]) return;
+            const data = slidesData[index];
+
+            // 安全にDOM要素を更新
+            const noticeEl = document.getElementById("chalkNotice");
+            if (noticeEl) noticeEl.innerText = data.notice || "歴史解説";
+
+            const blackboardEl = document.getElementById("blackboardContent");
+            if (blackboardEl) blackboardEl.innerHTML = data.blackboardHTML || "";
+
+            const narrationEl = document.getElementById("narrationText");
+            if (narrationEl) narrationEl.innerText = data.speechText || "";
+
+            // 侍SVGの更新
+            let currentPose = data.pose;
+            if (isResultSlide(data.id)) {
+                currentPose = lastSelectedCorrect ? "happy" : "sad";
+            }
+            const avatarEl = document.getElementById("samuraiAvatar");
+            if (avatarEl && typeof getSamuraiSVG === 'function') {
+                avatarEl.innerHTML = getSamuraiSVG(currentPose);
+            }
+
+            // ★ ここが重要：判定スライドの場合、黒板の中に元々書いてある「〇」や「せいかい！」を判定結果で強制上書きする
+            updateResultForSlide(data.id);
+
+            // 最終集計スライド
+            if (data.id === 118 || data.type === "final-result") {
+                renderResultSlide();
+            }
+
+            // ボタン制御
+            const prevBtn = document.getElementById("prevBtn");
+            if (prevBtn) prevBtn.disabled = (index === 0);
+
+            const nextBtn = document.getElementById("nextBtn");
+            if (nextBtn) {
+                if (index === slidesData.length - 1) {
+                    nextBtn.innerHTML = `<span>最初に戻る</span> <i class="fa-solid fa-rotate-right"></i>`;
+                } else {
+                    nextBtn.innerHTML = `<span>次へ進む</span> <i class="fa-solid fa-chevron-right"></i>`;
+                }
+            }
+        }
+
+        // --- 5. 判定・〇×描画処理 ---
+        function isResultSlide(id) {
+            const resultIds = [12, 16, 21, 30, 32, 39, 46, 48, 50, 59, 61, 69, 75, 77, 83, 89, 90, 93, 102, 104, 112];
+            return resultIds.includes(id);
+        }
+
+        // 〇×表示の割り当て関数（Q11を含む各IDとHTML要素のIDを完全に一致させる）
+        function updateResultForSlide(slideId) {
+            const resultMap = {
+                12: ["q1-result-mark", "q1-result-text"],
+                16: ["q2-result-mark", "q2-result-text"],
+                21: ["q3-result-mark", "q3-result-text"],
+                30: ["q4-result-mark", "q4-result-text"],
+                32: ["q5-result-mark", "q5-result-text"],
+                39: ["q6-result-mark", "q6-result-text"],
+                46: ["q7-result-mark", "q7-result-text"],
+                48: ["q8-result-mark", "q8-result-text"],
+                50: ["q9-result-mark", "q9-result-text"],
+                59: ["q10-result-mark", "q10-result-text"],
+                61: ["q11-result-mark", "q11-result-text"],
+                69: ["q12-result-mark", "q12-result-text"],
+                75: ["q13-result-mark", "q13-result-text"],
+                77: ["q14-result-mark", "q14-result-text"],
+                83: ["q15-result-mark", "q15-result-text"],
+                89: ["q16-result-mark", "q16-result-text"],
+                91: ["q17-result-mark", "q17-result-text"],
+                93: ["q18-result-mark", "q18-result-text"],
+                102: ["q19-result-mark", "q19-result-text"],
+                104: ["q20-result-mark", "q20-result-text"],
+                112: ["q21-result-mark", "q21-result-text"]
+            };
+
+            if (resultMap[slideId]) {
+                const [markId, textId] = resultMap[slideId];
+                updateResultDOM(markId, textId);
+            }
+        }
+
+        function updateResultDOM(markId, textId) {
+            // ★重要：現在のスライドが「判定画面」でない場合は何もしないで終了する
+            const currentSlide = slidesData[currentIndex];
+            if (!currentSlide || currentSlide.type === "quiz" || currentSlide.notice === "問題") {
+                return;
+            }
+
+            const markEl = document.getElementById(markId);
+            const textEl = document.getElementById(textId);
+
+            if (markEl && textEl) {
+                if (lastSelectedCorrect) {
+                    markEl.className = "text-6xl sm:text-7xl font-bold my-2 text-red-400";
+                    markEl.innerText = "〇";
+                    textEl.className = "text-xl sm:text-2xl font-chalk text-red-400";
+                    textEl.innerText = "せいかい！";
+                } else {
+                    markEl.className = "text-6xl sm:text-7xl font-bold my-2 text-cyan-400";
+                    markEl.innerText = "✕";
+                    textEl.className = "text-xl sm:text-2xl font-chalk text-cyan-400";
+                    textEl.innerText = "ざんねん！";
+                }
+            }
+        }
+
+        // --- 6. 最終判定結果 ---
+        function renderResultSlide() {
+            const countEl = document.getElementById('correct-count');
+            if (countEl) countEl.textContent = score;
+
+            let message = "";
+            if (score === totalQuestions) {
+                message = "全問正解！素晴らしい！";
+            } else if (score >= 15) {
+                message = "たいへんよくできました！";
+            } else if (score >= 10) {
+                message = "よくがんばったね！";
+            } else {
+                message = "次は満点をめざそう！";
+            }
+
+            const evalEl = document.getElementById('result-eval-message');
+            if (evalEl) evalEl.textContent = message;
+        }
+
+        // 初期描画
+        window.addEventListener("DOMContentLoaded", () => {
+            renderSlide(currentIndex);
+        });
+    </script>
+</body>
+</html>
